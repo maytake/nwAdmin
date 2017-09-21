@@ -29,5 +29,14 @@ export default {
 			}
 		}
 	},
+	loginOut: function() {
+		var that = this;
+		var result = loginOut().then(data => {
+			that.handleResult(data, function() {
+				that.setItem(USER_TOKEN, "");
+				hashHistory.push('/Login');
+			})
+		})
+	}
 
 }

@@ -31,13 +31,14 @@ export function post(url, paramsObj) {
         hosturl = Base.baseUrl + url
     }
 
-    var result = fetch(url, {
+    var result = fetch(hosturl, {
         method: 'POST',
         credentials: 'include',
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Access-Token': localStore.getItem('access_token') || ''
         },
         body: obj2params(newParamsObj)
     }).then(res => {

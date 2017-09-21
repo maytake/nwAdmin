@@ -7,14 +7,16 @@ var router = require('koa-router')();
 */
 
 var _logo = require('./login/index.js');
+var normalData = require('./getSingleResult.js')
 
-router.post('/home/member/login', function*(next) {
+router.post('/ebeim-api/test/login', function*(next) { //login
 	this.body = _logo
+}).post('/home/member/logout', function*(next) { //loginout
+	this.body = normalData
 })
-
 
 
 app.use(router.routes())
 	.use(router.allowedMethods());
 
-app.listen(3002);
+app.listen(3000);

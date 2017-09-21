@@ -93,9 +93,9 @@ module.exports = {
         proxy: [{
             // 凡是 `/api` 开头的 http 请求，都会被代理到 localhost:3000 上，由 koa 提供 mock 数据。
             // koa 代码在 ./mock 目录中，启动命令为 npm run mock
-            context: ['/erp', '/home'],
-            target: 'http://localhost:3003',
-            /*target: 'http://localhost:3003/',*/
+            context: ['/ebeim-api', '/erp', '/home', '/api'],
+            target: 'http://localhost:3000',
+            /*  target: 'http://192.168.1.56:8080/',*/
             changeOrigin: true,
             secure: false
         }],

@@ -23,9 +23,10 @@ class RouterMap extends React.Component {
                 <Route path='/'>
                     <IndexRedirect to="/Organize"/>
                 </Route>
+                <Route path='/Oa' component={App}>
+                    <Route path='/Organize' component={Home}></Route>
+                </Route>
                 
-                <Route path='/Organize' component={Home}></Route>
-
             </Router>
         )
     }

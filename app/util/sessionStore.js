@@ -2,11 +2,11 @@ export default {
     getItem: function(key) {
         let value
         try {
-            value = localStorage.getItem(key)
+            value = sessionStorag.getItem(key)
         } catch (ex) {
             // 开发环境下提示error
             if (__DEV__) {
-                console.error('localStorage.getItem报错, ', ex.message)
+                console.error('sessionStorage.getItem报错, ', ex.message)
             }
         } finally {
             return value
@@ -14,23 +14,23 @@ export default {
     },
     setItem: function(key, value) {
         try {
-            // ios safari 无痕模式下，直接使用 localStorage.setItem 会报错
-            localStorage.setItem(key, value)
+            // ios safari 无痕模式下，直接使用 sessionStorage.setItem 会报错
+            sessionStorag.setItem(key, value)
         } catch (ex) {
             // 开发环境下提示 error
             if (__DEV__) {
-                console.error('localStorage.setItem报错, ', ex.message)
+                console.error('sessionStorage.setItem报错, ', ex.message)
             }
         }
     },
     removeItem: function(key) {
         try {
-            // ios safari 无痕模式下，直接使用 localStorage.setItem 会报错
-            localStorage.removeItem(key)
+            // ios safari 无痕模式下，直接使用 sessionStorage.setItem 会报错
+            sessionStorag.removeItem(key)
         } catch (ex) {
             // 开发环境下提示 error
             if (__DEV__) {
-                console.error('localStorage.removeItem报错, ', ex.message)
+                console.error('sessionStorage.removeItem报错, ', ex.message)
             }
         }
     },

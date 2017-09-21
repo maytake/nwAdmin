@@ -3,15 +3,16 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { hashHistory } from 'react-router'
-import localStore from '../../util/localStore'
-import Base from '../../util/base' 
 import { message, Button } from 'antd';
-//引入action
-import * as userInfoActionsFromOtherFile from '../../actions/userinfo' 
-import LoginComponent from '../../components/Login'
-import {loginIn} from '../../fetch/login'
+import localStore from '../../util/localStore'
+import Base from '../../util/base'
 
-import {USER_TOKEN} from '../../config/localStoreKey.js'
+//引入action
+import * as userInfoActionsFromOtherFile from '../../actions/userinfo'
+import LoginComponent from '../../components/Login'
+import { loginIn } from '../../fetch/login'
+
+import { USER_TOKEN } from '../../config/localStoreKey.js'
 
 class WrappedLogin extends React.Component {
     constructor(props, context) {
@@ -22,30 +23,30 @@ class WrappedLogin extends React.Component {
         }
     }
 
-  render() {
-    
-    return (
-     <div>
+    render() {
+
+        return (
+            <div>
         <div>
                {
-                    // 等待验证之后，再显示登录信息
-                    this.state.checking
-                    ? <div>{/* 等待中 */}</div>
-                    : <LoginComponent loginHandle={this.loginHandle.bind(this)}/>
-                }
+            // 等待验证之后，再显示登录信息
+            this.state.checking
+                ? <div>{ /* 等待中 */ }</div>
+                : <LoginComponent loginHandle={this.loginHandle.bind(this)}/>
+            }
                 
         </div>
        
       </div>
-    );
-  }
+        );
+    }
 
-  componentDidMount() {
+    componentDidMount() {
         // 判断是否已经登录
         this.doCheck()
     }
     doCheck() {
-        if (localStore.getItem(USER_TOKEN)){
+        if (localStore.getItem(USER_TOKEN)) {
             // 已经登录，则跳转到用户主页
             this.goUserPage();
         } else {
@@ -55,34 +56,41 @@ class WrappedLogin extends React.Component {
             })
         }
     }
-    
+
     // 处理登录之后的事情
     loginHandle(subinfo) {
-        var that =this;
-        // 保存用户名
+        var that = this;
+
+        // 跟新用户信息
         const actions = this.props.userInfoActions
         let userinfo = this.props.userinfo
         userinfo = subinfo
         actions.update(userinfo)
 
 
-        const params = this.props.params
-        const router = params.router
-        if (router) {
-            // 跳转到指定的页面
-            hashHistory.push(router)
-        } 
+
 
         //提交登陆信息
         loginIn(subinfo).then(data => {
-          Base.handleResult(data, function(data) {
-            let Global = data.resultData.data;
-            message.success(data.resultMsg, 1, function() {
-              localStore.setItem(USER_TOKEN, Global.token);
-              that.goUserPage();
-            });
+            Base.handleResult(data, function(data) {
+                let Global = data.resultData.data;
+                message.success(data.resultMsg, 1, function() {
+                    if (subinfo.remember) {
+                        localStore.setItem(USER_TOKEN, Global.token);
+                    }
 
-          })
+                    //从其他页面跳到登陆会传个参数params={router: "/detail/123"}登陆后跳转到指定页面
+                    const params = that.props.params
+                    const router = params.router
+                    if (router) {
+                        hashHistory.push(router)
+                    } else {
+                        that.goUserPage();
+                    }
+
+                });
+
+            })
         })
 
 
@@ -100,7 +108,7 @@ class WrappedLogin extends React.Component {
 
 
 
-// -------------------redux react 绑定--------------------
+// -------------------绑定react--------------------
 
 function mapStateToProps(state) {
     return {

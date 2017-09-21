@@ -11,7 +11,7 @@ export function loginOut() {
 }
 //登录
 export function loginIn(params) {
-	return post('/home/member/login', params)
+	return post('/ebeim-api/test/login', params)
 }
 //重置密码
 export function changePassword(params) {
