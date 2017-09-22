@@ -7,7 +7,7 @@ const {Header} = Layout
 import { bindActionCreators } from 'redux'
 
 
-
+import Base from '../../util/base.js'
 import { hashHistory } from 'react-router'
 
 class Head extends React.Component {
@@ -22,7 +22,13 @@ class Head extends React.Component {
         return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
     }
 
+
     //退出事件
+    exitLogin({key}) {
+        if (key == 100022) {
+            Base.loginOutThing();
+        }
+    }
 
     showModal() {
         this.setState({
@@ -35,7 +41,7 @@ class Head extends React.Component {
     render() {
 
         const menu = (
-        <Menu>
+        <Menu  onClick={this.exitLogin.bind(this)}>
              
               <Menu.Item key="100033">
 

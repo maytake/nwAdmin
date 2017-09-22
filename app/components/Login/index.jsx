@@ -14,16 +14,22 @@ class Login extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+        this.state = {
+            loading: false
+        }
     }
     handleSubmit(e) {
         var that = this;
         e.preventDefault();
-        that.props.form.validateFields((err, values) => {
+        this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-                const loginHandle = this.props.loginHandle
+                const loginHandle = that.props.loginHandle
+                {/*加载中...*/}
+                that.props.loadInit(true)
+                {/*登陆*/}
                 loginHandle(values);
-
+       
             }
         });
     }
@@ -32,8 +38,11 @@ class Login extends React.Component {
         return (
             <div>
         
-        <div className="login-bg"></div>  
+        <div className="login-bg"></div>
+        
+        
         <div id="login-wrap">
+          
           <img className="login-logo" src={Logo}/>
           <Form onSubmit={this.handleSubmit.bind(this)} className="login-form">
                 <FormItem>

@@ -2,6 +2,18 @@ import {
 	hashHistory
 } from 'react-router'
 
+import {
+	Modal,
+} from 'antd';
+import {
+	loginOut
+} from '../fetch/login/index'
+import {
+	USER_TOKEN
+} from '../config/localStoreKey.js'
+import localStore from './localStore'
+
+
 export default {
 	tipForm: false,
 	baseUrl: 'http://192.168.1.56:8080/ ',
@@ -29,11 +41,11 @@ export default {
 			}
 		}
 	},
-	loginOut: function() {
+	loginOutThing: function() {
 		var that = this;
 		var result = loginOut().then(data => {
 			that.handleResult(data, function() {
-				that.setItem(USER_TOKEN, "");
+				localStore.setItem(USER_TOKEN, "");
 				hashHistory.push('/Login');
 			})
 		})

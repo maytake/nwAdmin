@@ -3,7 +3,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { hashHistory } from 'react-router'
-import { message, Button } from 'antd';
+import { message, Button, Spin } from 'antd';
 import localStore from '../../util/localStore'
 import Base from '../../util/base'
 
@@ -19,7 +19,8 @@ class WrappedLogin extends React.Component {
         super(props, context);
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
         this.state = {
-            checking: true
+            checking: true,
+            loading: false 
         }
     }
 
@@ -27,17 +28,19 @@ class WrappedLogin extends React.Component {
 
         return (
             <div>
-        <div>
-               {
+                {
             // 等待验证之后，再显示登录信息
             this.state.checking
                 ? <div>{ /* 等待中 */ }</div>
-                : <LoginComponent loginHandle={this.loginHandle.bind(this)}/>
+                : <div>
+                    <div className="loginspin">
+                        <Spin spinning={this.state.loading} tip="Loading..." size="large"/>
+                    </div>  
+                    <LoginComponent loginHandle={this.loginHandle.bind(this)} loadInit={loading=>this.loadInit(loading)} />
+                </div>
             }
-                
-        </div>
-       
-      </div>
+                    
+            </div>
         );
     }
 
@@ -55,6 +58,12 @@ class WrappedLogin extends React.Component {
                 checking: false
             })
         }
+    }
+    //登陆loading状态传入
+    loadInit(loading){
+        this.setState({
+            loading
+        })
     }
 
     // 处理登录之后的事情
@@ -75,9 +84,10 @@ class WrappedLogin extends React.Component {
             Base.handleResult(data, function(data) {
                 let Global = data.resultData.data;
                 message.success(data.resultMsg, 1, function() {
-                    if (subinfo.remember) {
-                        localStore.setItem(USER_TOKEN, Global.token);
-                    }
+
+                    that.setState({loading: true})
+                    localStore.setItem(USER_TOKEN, Global.token);
+
 
                     //从其他页面跳到登陆会传个参数params={router: "/detail/123"}登陆后跳转到指定页面
                     const params = that.props.params
@@ -93,8 +103,9 @@ class WrappedLogin extends React.Component {
             })
         })
 
-
     }
+
+
 
     goUserPage() {
         hashHistory.push('/')
