@@ -8,7 +8,7 @@ import { is, fromJS } from 'immutable';
 
 
 
-class LeftMenu extends React.Component {
+class LeftMenuComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
     }
@@ -54,4 +54,4 @@ class LeftMenu extends React.Component {
 }
 
 
-export default LeftMenu
+export default LeftMenuComponent

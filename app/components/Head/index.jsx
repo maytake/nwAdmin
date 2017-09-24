@@ -10,7 +10,7 @@ import { bindActionCreators } from 'redux'
 import Base from '../../util/base.js'
 import { hashHistory } from 'react-router'
 
-class Head extends React.Component {
+class HeadCompontent extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -76,4 +76,4 @@ class Head extends React.Component {
     }
 }
 
-export default Head;
+export default HeadCompontent;
