@@ -45,9 +45,7 @@ class HeadCompontent extends React.Component {
 
         const menu = (
         <Menu  onClick={this.exitLogin.bind(this)}>
-             
               <Menu.Item key="100033">
-
               </Menu.Item>
               <Menu.Item key="100022">
                  <span >退出登录</span>

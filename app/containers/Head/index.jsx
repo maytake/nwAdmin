@@ -11,7 +11,7 @@ import * as Actions from '../../actions/centerinfo'
 
 import { hashHistory } from 'react-router'
 
-import {HeadCompontent} from '../../components/Head'
+import HeadCompontent from '../../components/Head'
 
 class Head extends React.Component {
     constructor(props, context) {
