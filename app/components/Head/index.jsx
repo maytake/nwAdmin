@@ -39,6 +39,9 @@ class HeadCompontent extends React.Component {
 
 
     render() {
+        const firstMenu = this.props.firstMenu;
+        /*if (!firstMenu)
+            return false;*/
 
         const menu = (
         <Menu  onClick={this.exitLogin.bind(this)}>
@@ -62,9 +65,13 @@ class HeadCompontent extends React.Component {
             style={{
                 lineHeight: '80px'
             }}>
-                    <Menu.Item key="1">nav 1</Menu.Item>
+            { /*firstMenu.map(item => {
+                <Menu.Item key={item.index}><Link to={item.index}>{item.title}</Link></Menu.Item>
+            })*/ }
+                <Menu.Item key="1">nav 1</Menu.Item>
                     <Menu.Item key="2">nav 2</Menu.Item>
                     <Menu.Item key="3">nav 3</Menu.Item>
+              
                 </Menu>
                 <div className="userHead">
                   <Dropdown overlay={menu} placement="bottomCenter">

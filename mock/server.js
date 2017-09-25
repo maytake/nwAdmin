@@ -6,13 +6,24 @@ var router = require('koa-router')();
 });
 */
 
+
+
+
 var _logo = require('./login/index.js');
 var normalData = require('./getSingleResult.js')
+var _menu = require('./menu/getmenu.js');
+
+
+
+
+
 
 router.post('/ebeim-api/test/login', function*(next) { //login
 	this.body = _logo
 }).post('/home/member/logout', function*(next) { //loginout
 	this.body = normalData
+}).post('/home/index/getmenu', function*(next) {//defaultMenu
+    this.body = _menu
 })
 
 

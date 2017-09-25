@@ -6,6 +6,9 @@ import { bindActionCreators } from 'redux'
 
 
 import Base from '../../util/base.js'
+//action
+import * as Actions from '../../actions/centerinfo'
+
 import { hashHistory } from 'react-router'
 
 import {HeadCompontent} from '../../components/Head'
@@ -24,10 +27,36 @@ class Head extends React.Component {
 
 
     render() {
-        <HeadCompontent/>
-        
+        const firstMenu=this.props.menu_data;
+        console.log("first:"+firstMenu)
+       return (
+        <HeadCompontent firstMenu={ this.props.menu_data } menuAction={this.menuAction.bind(this)}/>
         )
+        
+        
+        
+    }
+    //切换菜单
+    menuAction(){
+        const menuChange = this.props.menuChange
+    }
+
+}
+
+
+{/*--------------connect----------------*/}
+function mapStateToProps(state) {
+    return {
+        menu_data: state.centerinfo.menu_data.firstMenu
     }
 }
 
-export default Head;
+function mapDispatchToProps(dispatch) {
+    return {
+        menuChange: bindActionCreators(Actions.menuChange, dispatch),
+    }
+}
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Head)

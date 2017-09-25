@@ -12,11 +12,14 @@ const {Header, Content, Sider} = Layout;
 
 import { is, fromJS } from 'immutable';
 
+
 import { USER_TOKEN } from '../config/localStoreKey.js'
 import localStore from '../util/localStore'
+//action
+import * as AllDataAction from '../actions/centerinfo'
 
-import Head from '../components/Head'
-import LeftMenu from '../components/LeftMenu'
+import Head from './Head'
+import LeftMenu from './LeftMenu'
 
 class App extends React.Component {
     constructor(props, context) {
@@ -34,6 +37,7 @@ class App extends React.Component {
         this.setState({
             minHeight: window.innerHeight
         })
+        this.props.getMenuData();
 
     }
     shouldComponentUpdate(nextProps, nextState) {
@@ -73,4 +77,18 @@ class App extends React.Component {
 }
 
 
-module.exports = App
+// ------------------- 绑定 --------------------
+
+function mapStateToProps(state) {
+    return {}
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getMenuData: bindActionCreators(AllDataAction.getMenuData, dispatch),
+    }
+}
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(App)

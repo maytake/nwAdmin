@@ -16,6 +16,7 @@ import localStore from './localStore'
 
 export default {
 	tipForm: false,
+	//接口地址
 	baseUrl: 'http://192.168.1.56:8080/ ',
 	//处理后台返回数据
 	handleResult: function(result, success, err) {

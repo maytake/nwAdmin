@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { is, fromJS } from 'immutable';
 
-import {LeftMenuComponent} from '../../components/LeftMenu'
+import { LeftMenuComponent } from '../../components/LeftMenu'
 
 class LeftMenu extends React.Component {
     constructor(props, context) {
@@ -17,7 +17,9 @@ class LeftMenu extends React.Component {
 
     render() {
         return (
-          <LeftMenuComponent/>
+
+            <LeftMenuComponent/>
+
         )
     }
 }
