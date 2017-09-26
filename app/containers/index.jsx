@@ -37,6 +37,7 @@ class App extends React.Component {
         this.setState({
             minHeight: window.innerHeight
         })
+        //获取菜单数据
         this.props.getMenuData();
 
     }

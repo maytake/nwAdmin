@@ -18,11 +18,25 @@ class LeftMenu extends React.Component {
     render() {
         return (
 
-            <LeftMenuComponent/>
+            <LeftMenuComponent Menudata={this.props.menu_data}/>
 
         )
     }
 }
 
+{/*-------------------bind react-------------------------*/}
+function mapStateToProps(state) {
+    return {
+        menu_data: state.centerinfo.menu_data.secondMenu
+    }
+}
 
-export default LeftMenu
+function mapDispatchToProps(dispatch) {
+    return {
+
+    }
+}
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(LeftMenu)

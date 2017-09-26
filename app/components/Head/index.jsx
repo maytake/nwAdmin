@@ -5,7 +5,9 @@ import { is, fromJS } from 'immutable';
 import { Layout, Menu, Avatar, Dropdown } from 'antd'
 const {Header} = Layout
 import { bindActionCreators } from 'redux'
-
+//引入常量
+import { CURFIRSTMENU, DEFAULTPARENT, DEFAULTCURRENT } from '../../config/localStoreKey.js'
+import localStore from '../../util/localStore.js'
 
 import Base from '../../util/base.js'
 import { hashHistory } from 'react-router'
@@ -36,12 +38,21 @@ class HeadCompontent extends React.Component {
         });
     }
 
+    clickMenu(item) {
 
+        this.props.menuAction({
+            flag: item.key
+        });
+        localStore.setItem(CURFIRSTMENU, item.key);
+
+
+
+    }
 
     render() {
         const firstMenu = this.props.firstMenu;
-        /*if (!firstMenu)
-            return false;*/
+        if (!firstMenu)
+            return false;
 
         const menu = (
         <Menu  onClick={this.exitLogin.bind(this)}>
@@ -52,25 +63,30 @@ class HeadCompontent extends React.Component {
               </Menu.Item>
             </Menu>
         )
-        let DefMenu = "1"
+        let DefMenu = localStore.getItem(CURFIRSTMENU) ? localStore.getItem(CURFIRSTMENU) : "Oa"
         return (
             <Header className="header">
-                <div className="logo" />
+                <div style={{
+                marginLeft:'-50px'
+            }} className="logo" />
                 <Menu
             theme="dark"
             mode="horizontal"
             defaultSelectedKeys={[DefMenu]}
             style={{
                 lineHeight: '80px'
-            }}>
-            { /*firstMenu.map(item => {
-                <Menu.Item key={item.index}><Link to={item.index}>{item.title}</Link></Menu.Item>
-            })*/ }
-                <Menu.Item key="1">nav 1</Menu.Item>
-                    <Menu.Item key="2">nav 2</Menu.Item>
-                    <Menu.Item key="3">nav 3</Menu.Item>
-              
-                </Menu>
+            }}
+            onClick={this.clickMenu.bind(this)}
+            >
+
+             {
+            firstMenu.map(item => {
+                return (
+                    <Menu.Item key={item.index}><Link to={item.index}>{item.title}</Link></Menu.Item>
+                )
+            })
+            }
+            </Menu>
                 <div className="userHead">
                   <Dropdown overlay={menu} placement="bottomCenter">
                      <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" size="large" />

@@ -28,17 +28,16 @@ class Head extends React.Component {
 
     render() {
         const firstMenu=this.props.menu_data;
-        console.log("first:"+firstMenu)
-       return (
-        <HeadCompontent firstMenu={ this.props.menu_data } menuAction={this.menuAction.bind(this)}/>
+        return (
+            <HeadCompontent firstMenu={ this.props.menu_data } menuAction={this.menuAction.bind(this)}/>
         )
         
         
         
     }
     //切换菜单
-    menuAction(){
-        const menuChange = this.props.menuChange
+    menuAction(obj){
+        const menuChange = this.props.menuChange(obj)
     }
 
 }
