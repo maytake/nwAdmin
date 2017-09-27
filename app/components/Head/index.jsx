@@ -61,7 +61,7 @@ class HeadCompontent extends React.Component {
               <Menu.Item key="100022">
                  <span >退出登录</span>
               </Menu.Item>
-            </Menu>
+        </Menu>
         )
         let DefMenu = localStore.getItem(CURFIRSTMENU) ? localStore.getItem(CURFIRSTMENU) : "Oa"
         return (
@@ -70,23 +70,24 @@ class HeadCompontent extends React.Component {
                 marginLeft:'-50px'
             }} className="logo" />
                 <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={[DefMenu]}
-            style={{
-                lineHeight: '80px'
-            }}
-            onClick={this.clickMenu.bind(this)}
-            >
+                theme="dark"
+                mode="horizontal"
+                defaultSelectedKeys={[DefMenu]}
+                style={{
+                    lineHeight: '80px'
+                }}
+                onClick={this.clickMenu.bind(this)}
+                >
 
-             {
-            firstMenu.map(item => {
-                return (
-                    <Menu.Item key={item.index}><Link to={item.index}>{item.title}</Link></Menu.Item>
-                )
-            })
-            }
-            </Menu>
+                 {
+                firstMenu.map(item => {
+                    return (
+                        <Menu.Item key={item.index}><Link to={item.index}>{item.title}</Link></Menu.Item>
+                    )
+                })
+                }
+                </Menu>
+            
                 <div className="userHead">
                   <Dropdown overlay={menu} placement="bottomCenter">
                      <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" size="large" />

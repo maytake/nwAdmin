@@ -33,7 +33,7 @@ export function post(url, paramsObj) {
 
     var result = fetch(hosturl, {
         method: 'POST',
-        credentials: 'include',
+        credentials: 'include',//表示允许跨越传递cookie，
         headers: {
             'Access-Control-Allow-Origin': '*',
             'Accept': 'application/json, text/plain, */*',

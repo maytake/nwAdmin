@@ -13,6 +13,7 @@ import WrappedLogin from '../containers/Login'
 import Home from '../containers/Home'
 import NotFound from '../containers/404'
 
+import { Action } from './index'
 
 class RouterMap extends React.Component {
     render() {
@@ -24,7 +25,7 @@ class RouterMap extends React.Component {
                     <IndexRedirect to="/Organize"/>
                 </Route>
                 <Route path='/Oa' component={App}>
-                    <Route path='/Organize' component={Home}></Route>
+                    <Route path='/Organize' getComponent={Action.JobManage}></Route>
                 </Route>
                 
             </Router>

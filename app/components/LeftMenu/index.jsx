@@ -24,7 +24,7 @@ class LeftMenuComponent extends React.Component {
 
         if (!Menudata)//第一次渲染没有值
             return false
-        console.log(Menudata)
+        
         return (
             <Menu
             mode="inline"

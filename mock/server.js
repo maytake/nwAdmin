@@ -8,12 +8,12 @@ var router = require('koa-router')();
 
 
 
+var normalData = require('./getSingleResult.js')
 
 var _logo = require('./login/index.js');
-var normalData = require('./getSingleResult.js')
 var _menu = require('./menu/getmenu.js');
 
-
+var _home3 = require('./home/getrolelist.js')
 
 
 
@@ -24,7 +24,17 @@ router.post('/ebeim-api/test/login', function*(next) { //login
 	this.body = normalData
 }).post('/home/index/getmenu', function*(next) {//defaultMenu
     this.body = _menu
+}).post('/home/role/getrolelist', function*(next) {
+    this.body = _home3
+}).post('/home/role/addrole', function*(next) {
+    this.body = normalData
+}).post('/home/role/editrole', function*(next) {
+    this.body = normalData
+}).post('/home/role/delrole', function*(next) {
+    this.body = normalData
 })
+
+
 
 
 app.use(router.routes())
