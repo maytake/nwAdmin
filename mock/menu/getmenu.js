@@ -8,7 +8,7 @@ module.exports = {
 		},
 		"data": [{
 			"id": "1",
-			"title": "数据源列表",
+			"title": "数据源",
 			"index": "Oa",
 			"child": [{
 				"id": "4",

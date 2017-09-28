@@ -9,7 +9,7 @@ import * as Request from '../../../fetch/center/index.js'
 import { PAGECONF } from '../../../config/localStoreKey.js'
 
 import Base from '../../../util/base.js'
-
+import JobSearch from './subPage/JobSearch'
 
 
 class JobManage extends React.Component {
@@ -35,7 +35,65 @@ class JobManage extends React.Component {
         return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
     }
 
+	//显示弹窗  ----1
+	editRoleInfo(type, record) {
+		if (type == "edit") {
+			this.setState({
+				isVisibleEdit: true,
+				record
+			})
+		} else {
+			this.setState({
+				isVisible: true,
+			})
+		}
+	}
 
+	//关闭弹窗  ----2
+	closeWin() {
+		this.setState({
+			isVisible: false,
+			isVisibleEdit: false
+		})
+	}
+
+	//删除岗位
+	delGwFunc(id) {
+		var that = this;
+		Request.delRole({
+			id: id
+		}).then(data => {
+			Base.handleResult(data, function(data) {
+				that.getGWListSearch();
+			})
+		})
+	}
+
+	//搜索
+	onChangeSearch(values) {
+		let pager = Object.assign({}, this.state.pagination, {
+			current: 1,
+		});
+
+		this.setState({
+			keyword: values.keyword ? values.keyword : "",
+			pagination: pager
+		}, () => {
+			this.getGWListSearch()
+		})
+	}
+	//获取搜索
+	getGWListSearch() {
+		const {
+			pagination,
+			keyword
+		} = this.state;
+		this.getGWListData({
+			pagesize: pagination.pageSize,
+			p: pagination.current,
+			keyword: keyword
+		});
+	}
     //获取当前岗位列表
     getGWListData(params = {}) {
         this.setState({
@@ -74,17 +132,13 @@ class JobManage extends React.Component {
 			width: '20%',
 			key: 'operation',
 			render: (text, record, index) => {
-				let _url = "/JobPower/role/" + record.role_id;
+				
 				return (
 					<div>
 						<Tooltip placement="top" title='编辑'>
 			              <Icon  onClick={this.editRoleInfo.bind(this,"edit",record)}  type="edit"  size="large" style={{ fontSize: 16 ,marginRight:5}}/>
 			            </Tooltip>
-			            <Tooltip placement="top" title='设置权限'>
-			            	<Link to={_url}>
-			              		<Icon type="link" style={{ "color" : "rgba(0, 0, 0, 0.65)",fontSize: 16 ,marginRight:5}}/>
-			              	</Link>
-			            </Tooltip>
+			       
 		            	<Popconfirm  title="确定删除该岗位吗？" onConfirm={this.delGwFunc.bind(this,record.role_id)} okText="是" cancelText="否">
 			              <Icon  type="delete" style={{ fontSize: 16 ,marginRight:5}}/>
 			            </Popconfirm>
@@ -94,10 +148,15 @@ class JobManage extends React.Component {
 		}]
         return (
         	<div>
+        		<JobSearch 
+                	onChangeSearch = {this.onChangeSearch.bind(this)} 
+                />
         		<Table 
-		        dataSource={this.state.data} 
+		        dataSource={this.state.data}
+		        pagination={this.state.pagination}  
 		        columns={columns}
-		        loading={this.state.loading}  
+		        loading={this.state.loading} 
+		        rowKey={record => record.role_id} 
 		        bordered/>
         	
         	</div>

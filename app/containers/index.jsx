@@ -59,12 +59,18 @@ class App extends React.Component {
                             <LeftMenu  openKey='4'/>
                         </Sider>
                         <Layout style={{ padding: '24px  0 24px 24px' }}>
+                            <Breadcrumb style={{ margin: '12px 0' }}>
+                                <Breadcrumb.Item>首页</Breadcrumb.Item>
+                                <Breadcrumb.Item>列表页</Breadcrumb.Item>
+                                <Breadcrumb.Item>详细页</Breadcrumb.Item>
+                            </Breadcrumb>
                           <Content style={{
                 background: '#fff',
                 padding: 24,
                 margin: 0,
                 position: "relative"
             }}>
+                            
                             {this.props.children}
                           </Content>
                         </Layout>

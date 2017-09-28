@@ -19,7 +19,7 @@ export const PAGECONF = {
 		return `总计 ${total} 条记录`
 	},
 	defaultPageSize: 25,
-	showQuickJumper: true,
+	showQuickJumper: true,//快速跳转至
 	showSizeChanger: true,
 	pageSizeOptions: ['10', '25', '50', '100']
 }
