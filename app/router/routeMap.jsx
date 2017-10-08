@@ -21,13 +21,18 @@ class RouterMap extends React.Component {
             <Router history={this.props.history}>
                 
                 <Route path='/Login(/:router)' component={WrappedLogin}></Route>
+
                 <Route path='/'>
                     <IndexRedirect to="/Organize"/>
                 </Route>
+
                 <Route path='/Oa' component={App}>
-                    <Route path='/Organize' getComponent={Action.JobManage}></Route>
+                    <IndexRedirect to="/Organize"/>
+                    <Route path='/Organize' getComponent={Action.JobManage}/>
+                    <Route path='/TableManage' getComponent={Action.TableManage}/>
+                    <Route path='*' component={NotFound}/>
                 </Route>
-                
+
             </Router>
         )
     }

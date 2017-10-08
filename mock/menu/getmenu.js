@@ -22,7 +22,7 @@ module.exports = {
 				}, {
 					"id": "9",
 					"title": "岗位管理",
-					"index": "JobManage"
+					"index": "TableManage"
 				}, {
 					"id": "7",
 					"title": "成员管理",
@@ -39,10 +39,10 @@ module.exports = {
 					"title": "资产管理",
 					"index": "PropertyManage",
 					"child": [{
-					"id": "8",
-					"title": "组织架构",
-					"index": "Organize"
-				}],
+						"id": "8",
+						"title": "组织架构",
+						"index": "Organize"
+					}],
 					"is_select": 0
 				}],
 				"is_select": 0
