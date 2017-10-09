@@ -6,98 +6,79 @@ import './leftMenu.css'
 const {SubMenu} = Menu;
 const {Header, Content, Sider} = Layout;
 import { is, fromJS } from 'immutable';
+import localStore  from '../../util/localStore'
+import { DEFAULTPARENT, DEFAULTCURRENT } from '../../config/localStoreKey.js'
 
 
 
 class LeftMenuComponent extends React.Component {
     constructor(props, context) {
         super(props, context);
-    
+
     }
     shouldComponentUpdate(nextProps, nextState) {
         return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
     }
 
-
+    handleClick(e){
+        let path = e.keyPath;
+        console.log(path)
+    }
     render() {
-
         const Menudata = this.props.Menudata;
-console.log('2'+this.props.Menudata)
-        if (!Menudata)//第一次渲染没有值
+        console.log('2' + this.props.Menudata)
+        if (!Menudata) //第一次渲染没有值
             return false
-        
+
+        const defOpenKeys = localStore.getItem(DEFAULTPARENT) ? localStore.getItem(DEFAULTPARENT) : '4';
+        const defSelectedKeys = localStore.getItem(DEFAULTCURRENT) ? localStore.getItem(DEFAULTCURRENT) : 'Organize'
+      
         return (
-
-          /* <div>
-           <div className="logo" />
-            <Menu
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-            theme="dark"
-            style={{
-                height: '100%',
-                borderRight: 0
-            }}
+            <Sider
+            trigger={null}
+            collapsible={true}
+            collapsed={this.props.collapsed}
             >
+                      
+                           <div className="logo" />
+                            <Menu
+                                onClick={this.handleClick.bind(this)}
+                                defaultOpenKeys={[defOpenKeys]}
+                                defaultSelectedKeys={[defSelectedKeys]}
+                                theme="dark"
+                                mode="inline"
+                                style={{
+                                    height: '100%',
+                                    borderRight: 0
+                                }}
+                                >
 
-        {
-            Menudata.map(item => {
-                return (
-                    item.child ?
-                    <SubMenu key={item.id} title={<span><Icon type={item.IconType} /><span>{item.title}</span></span>}>
-                    {
+                                {
+                                    Menudata.map(item => {
+                                        return (
+                                            item.child ?
+                                            <SubMenu key={item.id} title={<span><Icon type={item.IconType} /><span>{item.title}</span></span>}>
+                                            {
+                                                item.child.map(item2 => {
+                                                    return (
+                                                        <Menu.Item key={item2.index}><Link to={'/' + item2.index}>{item2.title}</Link></Menu.Item>
+                                                    )
+                                                })
+                                            }
+                                                                     
+                                            </SubMenu> :
+                                            <Menu.Item key={item.index}><Link to={'/'}>{item.title}</Link></Menu.Item>
+                                        )
 
-                        item.child.map(item2=>{
-                            return(
-                                <Menu.Item key={item2.id}><Link to={'/' + item2.index}>{item2.title}</Link></Menu.Item>
-                                )
-                        })
-                    }
-                             
-                    </SubMenu>:
-                    <Menu.Item key={item.index}><Link to={'/'}>{item.title}</Link></Menu.Item>
-
-
-                )
-
-            })
-            }
-
-
-        </Menu>
-        </div>
-*/
+                                    })
+                                }
+                        </Menu>
+                   
+                    
+             </Sider>
 
 
 
-          <div>
-           <div className="logo" />
-           <Sider
-          trigger={null}
-          collapsible
-          collapsed={this.props.collapsed}
-        >
-          <div className="logo" />
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1">
-              <Icon type="user" />
-              <span>nav 1</span>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Icon type="video-camera" />
-              <span>nav 2</span>
-            </Menu.Item>
-            <Menu.Item key="3">
-              <Icon type="upload" />
-              <span>nav 3</span>
-            </Menu.Item>
-          </Menu>
-        </Sider>
-
-        </div>
-
-       
         )
     }
 }

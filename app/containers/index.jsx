@@ -27,8 +27,7 @@ class App extends React.Component {
         super(props, context);
         this.state = {
             minHeight: '100%',
-            collapsed:false,
-            flag:false
+            collapsed: false
         };
         let obj = this.state.collapsed
         this.props.actionCollapsed(obj);
@@ -45,51 +44,52 @@ class App extends React.Component {
         })
         //获取菜单数据
         this.props.getMenuData();
-        
-       
+
+
     }
     shouldComponentUpdate(nextProps, nextState) {
         return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
     }
     componentDidUpdate(nextProps, nextState) {
-        console.log('d'+this.props.collapsed)
+        console.log('d' + this.props.collapsed)
         this.setState({
             collapsed: this.props.collapsed
         })
     }
-    tog(){
-       
-        this.setState({
-            flag:!this.state.flag
-        })
-    }
+
     render() {
 
         return (
             <div>
-                <Layout style={{ minHeight: this.state.minHeight }}>
-                <div><button onClick={this.tog.bind(this)}>click</button>{console.log( this.state.collapsed+'15151531531531')}</div>
-                       
-                            <LeftMenu collapsed={this.state.collapsed} openKey='4'/>
-                      
+                <Layout style={{
+                minHeight: this.state.minHeight
+            }}>
+                <div className="ant-layout ant-layout-has-sider">
+                        <LeftMenu collapsed={this.state.collapsed} openKey='4'/>
 
                         <Layout>
                             <Head />
                             <Content style={{
-                            margin: '20px 20px 0',
-                            position: "relative"
-                            }}>
-                                <Breadcrumb style={{ margin: '0 0 6px' }}>
+                                    margin: '20px 20px 0',
+                                    position: "relative"
+                                }}>
+                                <Breadcrumb style={{
+                                    margin: '0 0 6px'
+                                }}>
                                     <Breadcrumb.Item>首页</Breadcrumb.Item>
                                     <Breadcrumb.Item>列表页</Breadcrumb.Item>
                                     <Breadcrumb.Item>详细页</Breadcrumb.Item>
                                 </Breadcrumb>
-                                <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+                                <div style={{
+                                        padding: 24,
+                                        background: '#fff',
+                                        minHeight: 360
+                                    }}>
                                     {this.props.children}
                                 </div>
                             </Content>
                         </Layout>
-                   
+                   </div> 
 
                 </Layout>
                 <BackTop />
@@ -111,7 +111,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         getMenuData: bindActionCreators(AllDataAction.getMenuData, dispatch),
-        actionCollapsed:bindActionCreators(Action.collapsed, dispatch)
+        actionCollapsed: bindActionCreators(Action.collapsed, dispatch)
     }
 }
 export default connect(

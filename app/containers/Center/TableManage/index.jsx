@@ -35,10 +35,10 @@ class TableManage extends React.Component {
     getListData(params = {}) {
         let that = this;
         Request.getTableList(params).then(data => {
-          console.log(data)
+          //console.log(data)
           Base.handleResult(data, function(data) {
               let datalist = data.resultData.data;
-              console.log(datalist)
+              //console.log(datalist)
               that.setState({data:datalist})
           })
         })

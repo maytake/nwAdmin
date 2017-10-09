@@ -16,15 +16,15 @@ module.exports = {
 				"IconType": "user",
 				"index": "",
 				"child": [{
-					"id": "8",
+					"id": "7",
 					"title": "组织架构",
 					"index": "Organize"
 				}, {
-					"id": "9",
+					"id": "8",
 					"title": "岗位管理",
 					"index": "TableManage"
 				}, {
-					"id": "7",
+					"id": "9",
 					"title": "成员管理",
 					"index": "PersonManage"
 				}],
@@ -38,11 +38,7 @@ module.exports = {
 					"id": "25",
 					"title": "资产管理",
 					"index": "PropertyManage",
-					"child": [{
-						"id": "8",
-						"title": "组织架构",
-						"index": "Organize"
-					}],
+					"child": [],
 					"is_select": 0
 				}],
 				"is_select": 0
