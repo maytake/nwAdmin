@@ -27,23 +27,23 @@ class Head extends React.Component {
 
 
     render() {
-        const firstMenu=this.props.menu_data;
+        const firstMenu = this.props.menu_data;
         return (
             <HeadCompontent firstMenu={ this.props.menu_data } menuAction={this.menuAction.bind(this)} />
         )
-        
-        
-        
+
+
+
     }
     //切换菜单
-    menuAction(obj){
+    menuAction(obj) {
         const menuChange = this.props.menuChange(obj)
     }
 
 }
-
-
-{/*--------------connect----------------*/}
+{
+    /*--------------connect----------------*/
+}
 function mapStateToProps(state) {
     return {
         menu_data: state.centerinfo.menu_data.firstMenu

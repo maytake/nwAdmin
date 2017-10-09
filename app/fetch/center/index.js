@@ -16,3 +16,8 @@ export function getRoleList(params) {
 export function delRole(params) {
 	return post('/home/role/delrole', params)
 }
+
+//获取表单列表
+export function getTableList(params) {
+	return post('/home/role/getTableList', params)
+}

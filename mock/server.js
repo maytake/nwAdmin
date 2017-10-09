@@ -13,7 +13,8 @@ var normalData = require('./getSingleResult.js')
 var _logo = require('./login/index.js');
 var _menu = require('./menu/getmenu.js');
 
-var _home3 = require('./home/getrolelist.js')
+var getrolelist = require('./home/getrolelist.js')
+var getTableList = require('./home/getTableList.js')
 
 
 
@@ -25,15 +26,16 @@ router.post('/ebeim-api/test/login', function*(next) { //login
 }).post('/home/index/getmenu', function*(next) {//defaultMenu
     this.body = _menu
 }).post('/home/role/getrolelist', function*(next) {
-    this.body = _home3
+    this.body = getrolelist
 }).post('/home/role/addrole', function*(next) {
     this.body = normalData
 }).post('/home/role/editrole', function*(next) {
     this.body = normalData
 }).post('/home/role/delrole', function*(next) {
     this.body = normalData
+}).post('/home/role/getTableList', function*(next) {
+    this.body = getTableList
 })
-
 
 
 
