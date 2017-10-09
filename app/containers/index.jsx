@@ -17,6 +17,7 @@ import { USER_TOKEN } from '../config/localStoreKey.js'
 import localStore from '../util/localStore'
 //action
 import * as AllDataAction from '../actions/centerinfo'
+import * as Action from '../actions/collapsed'
 
 import Head from './Head'
 import LeftMenu from './LeftMenu'
@@ -26,7 +27,12 @@ class App extends React.Component {
         super(props, context);
         this.state = {
             minHeight: '100%',
+            collapsed:false,
+            flag:false
         };
+        let obj = this.state.collapsed
+        this.props.actionCollapsed(obj);
+
     }
 
     componentDidMount() {
@@ -39,42 +45,52 @@ class App extends React.Component {
         })
         //获取菜单数据
         this.props.getMenuData();
-
+        
+       
     }
     shouldComponentUpdate(nextProps, nextState) {
         return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
     }
-
-
-
+    componentDidUpdate(nextProps, nextState) {
+        console.log('d'+this.props.collapsed)
+        this.setState({
+            collapsed: this.props.collapsed
+        })
+    }
+    tog(){
+       
+        this.setState({
+            flag:!this.state.flag
+        })
+    }
     render() {
+
         return (
             <div>
-                <Layout style={{
-                minHeight: this.state.minHeight
-            }}>
-                    <Head/>
-                    <Layout>
-                        <Sider width={200} >
-                            <LeftMenu  openKey='4'/>
-                        </Sider>
-                        <Layout style={{ padding: '24px  0 24px 24px' }}>
-                            <Breadcrumb style={{ margin: '12px 0' }}>
-                                <Breadcrumb.Item>首页</Breadcrumb.Item>
-                                <Breadcrumb.Item>列表页</Breadcrumb.Item>
-                                <Breadcrumb.Item>详细页</Breadcrumb.Item>
-                            </Breadcrumb>
-                          <Content style={{
-                background: '#fff',
-                padding: 24,
-                margin: 0,
-                position: "relative"
-            }}>
-                            
-                            {this.props.children}
-                          </Content>
+                <Layout style={{ minHeight: this.state.minHeight }}>
+                <div><button onClick={this.tog.bind(this)}>click</button>{console.log( this.state.collapsed+'15151531531531')}</div>
+                       
+                            <LeftMenu collapsed={this.state.collapsed} openKey='4'/>
+                      
+
+                        <Layout>
+                            <Head />
+                            <Content style={{
+                            margin: '20px 20px 0',
+                            position: "relative"
+                            }}>
+                                <Breadcrumb style={{ margin: '0 0 6px' }}>
+                                    <Breadcrumb.Item>首页</Breadcrumb.Item>
+                                    <Breadcrumb.Item>列表页</Breadcrumb.Item>
+                                    <Breadcrumb.Item>详细页</Breadcrumb.Item>
+                                </Breadcrumb>
+                                <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>
+                                    {this.props.children}
+                                </div>
+                            </Content>
                         </Layout>
-                    </Layout>
+                   
+
                 </Layout>
                 <BackTop />
             </div>
@@ -87,12 +103,15 @@ class App extends React.Component {
 // ------------------- 绑定 --------------------
 
 function mapStateToProps(state) {
-    return {}
+    return {
+        collapsed: state.collapsed
+    }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         getMenuData: bindActionCreators(AllDataAction.getMenuData, dispatch),
+        actionCollapsed:bindActionCreators(Action.collapsed, dispatch)
     }
 }
 export default connect(

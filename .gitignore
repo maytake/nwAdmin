@@ -1,3 +1,5 @@
 node_modules/
 build/
 npm-debug.log
+app/containers/Head/index.jsx
+app/containers/Head/index.jsx

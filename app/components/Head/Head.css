@@ -1,0 +1,24 @@
+.ant-layout-header .trigger {
+  font-size: 18px;
+  line-height: 80px;
+  padding: 0 16px;
+  cursor: pointer;
+  transition: color .3s;
+  color:#fff;
+  float: left;
+}
+.ant-layout-header .trigger:hover {
+  color: #108ee9;
+}
+
+
+.ant-layout-header {
+    padding: 0 50px 0 0;
+}
+.ant-menu-horizontal{
+  display: inline-block;
+}
+
+.logo{
+  width: 200px;
+}

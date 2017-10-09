@@ -104,7 +104,7 @@ class WrappedLogin extends React.Component {
                 let Global = data.resultData.data;
                 message.success(data.resultMsg, 1, function() {
 
-                    that.setState({loading: true})
+                    that.setState({loading: false})
                     localStore.setItem(USER_TOKEN, Global.token);
 
 

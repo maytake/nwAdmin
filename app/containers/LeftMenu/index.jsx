@@ -2,8 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { is, fromJS } from 'immutable';
-
+import { Layout, Menu, Icon } from 'antd';
 import LeftMenuComponent from '../../components/LeftMenu'
+
+
 
 class LeftMenu extends React.Component {
     constructor(props, context) {
@@ -17,9 +19,27 @@ class LeftMenu extends React.Component {
 
     render() {
         return (
-
-            <LeftMenuComponent Menudata={this.props.menu_data}/>
-
+         /*   <Sider
+                trigger={null}
+                collapsible
+                collapsed={this.props.collapsed}
+                width={200} >
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+            <Menu.Item key="1">
+              <Icon type="user" />
+              <span>nav 1</span>
+            </Menu.Item>
+            <Menu.Item key="2">
+              <Icon type="video-camera" />
+              <span>nav 2</span>
+            </Menu.Item>
+            <Menu.Item key="3">
+              <Icon type="upload" />
+              <span>nav 3</span>
+            </Menu.Item>
+          </Menu>
+            </Sider>*/
+         <LeftMenuComponent Menudata={this.props.menu_data} collapsed={this.props.collapsed}/>
         )
     }
 }
