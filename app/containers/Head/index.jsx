@@ -29,6 +29,7 @@ class Head extends React.Component {
     render() {
         const firstMenu=this.props.menu_data;
         return (
+            <HeadCompontent firstMenu={ this.props.menu_data } menuAction={this.menuAction.bind(this)} />
         )
         
         
