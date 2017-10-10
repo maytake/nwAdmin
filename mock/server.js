@@ -33,9 +33,16 @@ router.post('/ebeim-api/test/login', function*(next) { //login
     this.body = normalData
 }).post('/home/role/delrole', function*(next) {
     this.body = normalData
-}).post('/home/role/getTableList', function*(next) {
+}).post('/home/role/getTableList', function*(next) {//获取表格
     this.body = getTableList
+}).post('/home/role/addTableList', function*(next) {//添加表格
+    this.body = normalData
+}).post('/home/role/delTableList', function*(next) {//删除表格
+    this.body = normalData
+}).post('/home/role/editTableList', function*(next) {//编辑表格
+    this.body = normalData
 })
+
 
 
 

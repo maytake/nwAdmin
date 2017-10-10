@@ -17,7 +17,22 @@ export function delRole(params) {
 	return post('/home/role/delrole', params)
 }
 
+
+
+
 //获取表单列表
 export function getTableList(params) {
 	return post('/home/role/getTableList', params)
+}
+//添加表单列表
+export function addTableList(params) {
+	return post('/home/role/addTableList', params)
+}
+//删除表单列表
+export function delTableList(params) {
+	return post('/home/role/delTableList', params)
+}
+//编辑表单列表
+export function editTableList(params) {
+	return post('/home/role/editTableList', params)
 }

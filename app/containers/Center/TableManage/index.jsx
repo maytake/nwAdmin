@@ -9,6 +9,9 @@ import * as Request from '../../../fetch/center/index.js'
 import { PAGECONF } from '../../../config/localStoreKey.js'
 import Base from '../../../util/base.js'
 
+//添加栏
+import TableAdd from './subPage/TableAdd.jsx'
+
 
 class TableManage extends React.Component {
     constructor(props, context) {
@@ -17,7 +20,7 @@ class TableManage extends React.Component {
             data: [],
             pagination: PAGECONF,
             loading: false,
-            isVisible: false, //控制编辑窗口的现实隐藏
+            visible: false, //控制编辑窗口的现实隐藏
             isVisibleEdit: false,
             keyword: "",
             record: {}, //单行当数据
@@ -32,19 +35,60 @@ class TableManage extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
         return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
     }
+    //获取表格数据
     getListData(params = {}) {
+        this.setState({
+            loading: true
+        });
         let that = this;
         Request.getTableList(params).then(data => {
-          //console.log(data)
+        
           Base.handleResult(data, function(data) {
               let datalist = data.resultData.data;
-              //console.log(datalist)
-              that.setState({data:datalist})
+              that.setState({
+                data:datalist,
+                loading: false
+              })
           })
         })
 
     }
+    //删除row
+    delRow(id){
+        this.setState({
+            loading: true
+        });
+        var _this=this;
+        Request.addTableList({
+            id: id
+        }).then(data=>{
+            
+            Base.handleResult(data, function(data){
+                console.log(data)
+                let datalist=data.resultData.data;
+                console.log(datalist);
+                _this.setState({
+                    data:datalist,
+                    loading: false
+                })
+            })
+        })
+    }
 
+
+
+    //打开弹窗
+    handleOpen(){
+        this.setState({
+            visible:true
+        })
+    }
+    //关闭弹窗
+    handleClose(){
+        this.setState({
+             visible:false
+        })
+    }
     render() {
         const columns = [
             { title: 'Full Name', width: 100, dataIndex: 'name', key: 'name', fixed: 'left' },
@@ -62,16 +106,45 @@ class TableManage extends React.Component {
                 key: 'operation',
                 fixed: 'right',
                 width: 100,
-                render: () => <a href="#">action</a>,
+                render: (text, record, index) => {
+                    return(    
+                        <Popconfirm  title="确定删除该岗位吗？" onConfirm={this.delRow.bind(this, record.key)} okText="是" cancelText="否">
+                          <Icon  type="delete" style={{
+                                fontSize: 16,
+                                marginRight: 5
+                            }}/>
+                        </Popconfirm>
+                        )
+
+                },
             },
         ];
         return (
-          <div className="TableList">
-            <Table columns={columns} dataSource={this.state.data} scroll={{
-                x: 1500,
-                y: 300
-            }} />
-          </div>
+            <div>
+
+                <div >
+                    
+                    <TableAdd 
+                    visible={this.state.visible} 
+                    handleOpen={this.handleOpen.bind(this)} 
+                    handleClose={this.handleClose.bind(this)}
+
+                    />
+                </div>
+                <div className="ant-table-wrapper TableList">
+                    <Table 
+                    columns={columns} 
+                    dataSource={this.state.data}
+                    pagination={this.state.pagination} 
+                    loading={this.state.loading}
+                    rowKey={record => record.key}
+                    scroll={{
+                        x: 1500,
+                        y: 300
+                    }} />
+                  </div>
+            </div>
+          
             
 
         )

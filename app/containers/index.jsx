@@ -51,7 +51,6 @@ class App extends React.Component {
         return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
     }
     componentDidUpdate(nextProps, nextState) {
-        console.log('d' + this.props.collapsed)
         this.setState({
             collapsed: this.props.collapsed
         })
@@ -83,7 +82,8 @@ class App extends React.Component {
                                 <div style={{
                                         padding: 24,
                                         background: '#fff',
-                                        minHeight: 360
+                                        minHeight: 360,
+                                        position:'relative'
                                     }}>
                                     {this.props.children}
                                 </div>

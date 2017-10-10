@@ -10,7 +10,7 @@ import { PAGECONF } from '../../../config/localStoreKey.js'
 
 import Base from '../../../util/base.js'
 import JobSearch from './subPage/JobSearch'
-
+import JobTool from './subPage/JobTool'
 
 class JobManage extends React.Component {
     constructor(props, context) {
@@ -151,6 +151,14 @@ class JobManage extends React.Component {
         }]
         return (
             <div>
+                <JobTool 
+                    getDataList = {this.getGWListData.bind(this)}    
+                    showEdit = {this.state.isVisibleEdit} 
+                    showAdd = {this.state.isVisible}
+                    closeWin = {this.closeWin.bind(this)}
+                    showWin = {this.editRoleInfo.bind(this)}
+                    record = {this.state.record}
+                />
         		<JobSearch
             onChangeSearch = {this.onChangeSearch.bind(this)}
             />

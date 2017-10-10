@@ -22,11 +22,12 @@ class LeftMenuComponent extends React.Component {
 
     handleClick(e){
         let path = e.keyPath;
-        console.log(path)
+        console.log( path)
+        localStore.setItem(DEFAULTPARENT, path[1]);
+        localStore.setItem(DEFAULTCURRENT, path[0]);
     }
     render() {
         const Menudata = this.props.Menudata;
-        console.log('2' + this.props.Menudata)
         if (!Menudata) //第一次渲染没有值
             return false
 
