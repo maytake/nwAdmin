@@ -18,7 +18,7 @@ class AddForm extends React.Component {
         };
         return (
             <Form >
-                  <FormItem label="岗位名称" layout="vertical"  {...formItemLayout}>
+                  <FormItem label="姓名" layout="vertical"  {...formItemLayout}>
                     {getFieldDecorator('name', {
                         initialValue: '你老师',
                         rules: [{

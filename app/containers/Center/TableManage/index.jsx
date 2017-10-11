@@ -23,7 +23,7 @@ class TableManage extends React.Component {
             loading: false,
             visible: false, //控制编辑窗口的现实隐藏
             isVisibleEdit: false,
-            keyword: "",
+            keyWord: "",
             record: {}, //单行当数据
             loading: false
         }
@@ -87,9 +87,26 @@ class TableManage extends React.Component {
         })
     }
     //搜索内容
-    searchTable(){
-        const {}=this.state;
-        this.getListData()
+    searchTable(values){
+        let pager = Object.assign({}, this.state.pagination, {
+            current: 1,
+        });
+        this.setState({
+            keyWord: values.keyWord ? values.keyWord : "",
+            pagination: pager
+        },()=>{
+            this.getSearchTable()
+        })
+        
+    }
+    //获取搜索
+    getSearchTable(){
+        const {pagination, keyWord}=this.state;
+        this.getListData({
+            pagesize: pagination.pageSize,
+            p: pagination.current,
+            keyWord: keyWord
+        })
     }
     //打开弹窗
     handleOpen(){
@@ -119,15 +136,21 @@ class TableManage extends React.Component {
                 title: 'Action',
                 key: 'operation',
                 fixed: 'right',
-                width: 100,
+                width: 150,
                 render: (text, record, index) => {
-                    return(    
-                        <Popconfirm  title="确定删除该岗位吗？" onConfirm={this.delRow.bind(this, record.key)} okText="是" cancelText="否">
-                          <Icon  type="delete" style={{
-                                fontSize: 16,
+                    return(
+                        <div>
+                        <Button size="small" type="primary" icon="delete" style={{
                                 marginRight: 5
-                            }}/>
+                            }}>编辑</Button>
+                            
+                        <Popconfirm  title="确定删除该岗位吗？" onConfirm={this.delRow.bind(this, record.key)} okText="是" cancelText="否">
+                          <Button size="small" type="danger" icon="delete" style={{
+                                marginRight: 5
+                            }}>删除</Button>
+                        
                         </Popconfirm>
+                        </div>
                         )
 
                 },
@@ -145,7 +168,7 @@ class TableManage extends React.Component {
                     getListData = {this.getListData.bind(this)}
                     addListData = {this.addListData.bind(this)}
                     />
-                    <TableSearch/>
+                    <TableSearch searchTable={this.searchTable.bind(this)}/>
                 </div>
                 <div className="ant-table-wrapper TableList">
                     <Table 

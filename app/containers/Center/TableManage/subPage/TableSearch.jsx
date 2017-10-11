@@ -5,30 +5,44 @@ import { is, fromJS } from 'immutable';
 import { Form, Row, Col, Input, Button, Select, DatePicker, TimePicker, } from 'antd';
 const FormItem = Form.Item;
 const { MonthPicker, RangePicker } = DatePicker;
-
+const Option = Select.Option;
 
 class TableSearch extends React.Component {
     constructor(props, context) {
         super(props, context);
     }
     handleSearch(e) {
+        let that=this;
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
-            this.props.onChangeSearch(values);
+            if(err){
+                return
+            }
+            that.props.searchTable(values);
         });
     }
 
     restSearchForm() {
-      
+      this.props.form.setFieldsValue({
+            keyWord: "",
+            timePicker:"",
+            selectRange:""
+      });
+      that.props.searchTable({
+            keyWord: "",
+            timePicker:"",
+            selectRange:""
+      });
+
     }
     render() {
         const {getFieldDecorator} = this.props.form;
         const formItemLayout = {
             labelCol: {
-                span: 5
+                span: 6
             },
             wrapperCol: {
-                span: 19
+                span: 18
             },
         };
         const rangeConfig = {
@@ -42,17 +56,17 @@ class TableSearch extends React.Component {
                           {...formItemLayout}
                           label=" 请选择日期"
                         >
-                          {getFieldDecorator('range-time-picker', rangeConfig)(
+                          {getFieldDecorator('timePicker', rangeConfig)(
                             <RangePicker showTime format="YYYY-MM-DD HH:mm:ss" />
                           )}
                         </FormItem>
                     </Col>
 
-                    <Col span={5}>
+                    <Col span={6}>
                         <FormItem label="岗位名称" layout="vertical"  
                          {...formItemLayout}>
-                            {getFieldDecorator('name', {
-                                initialValue: '你老师',
+                            {getFieldDecorator('keyWord', {
+                                initialValue: '',
                                 rules: [{
                                     required: true,
                                     message: '请输入20个字以内的名称'
@@ -63,17 +77,17 @@ class TableSearch extends React.Component {
                         </FormItem>
                     </Col>
 
-                    <Col span={5}>
+                    <Col span={6}>
                         <FormItem
                           {...formItemLayout}
                           label="查找范围"
                         >
-                          {getFieldDecorator('select-single', {
+                          {getFieldDecorator('selectRange', {
                             rules: [
-                              { required: true, message: 'Please select your favourite colors!' },
+                              { required: true, message: '请选择范围' },
                             ],
                           })(
-                            <Select placeholder="Please select favourite colors">
+                            <Select placeholder="请选择范围">
                               <Option value="red">Red</Option>
                               <Option value="green">Green</Option>
                               <Option value="blue">Blue</Option>
