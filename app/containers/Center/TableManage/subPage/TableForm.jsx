@@ -8,18 +8,30 @@ class AddForm extends React.Component {
     constructor(props, context) {
         super(props, context);
     }
-    componentDidMount() {
-        this.props.form.validateFields();
-    }
 
-    render() {
-      console.log(this.props)
+
+    render() { 
         const {getFieldDecorator} = this.props.form;
+        const formItemLayout = {
+          labelCol: { span: 5 },
+          wrapperCol: { span: 19 },
+        };
         return (
-            <Form layout="vertical">
-                  <FormItem label="岗位名称">
-                    {getFieldDecorator('role_name', {
-                        initialValue: '请输入名称',
+            <Form >
+                  <FormItem label="岗位名称" layout="vertical"  {...formItemLayout}>
+                    {getFieldDecorator('name', {
+                        initialValue: '你老师',
+                        rules: [{
+                            required: true,
+                            message: '请输入20个字以内的名称'
+                        }],
+                    })(
+                        <Input />
+                    )}
+                  </FormItem>
+                  <FormItem label="年龄" layout="vertical"  {...formItemLayout}>
+                    {getFieldDecorator('age', {
+
                         rules: [{
                             required: true,
                             message: '请输入20个字以内的名称'

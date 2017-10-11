@@ -12,26 +12,26 @@ module.exports = {
 			"index": "Oa",
 			"child": [{
 				"id": "4",
-				"title": "企业中心",
+				"title": "数据源管理",
 				"IconType": "user",
 				"index": "",
 				"child": [{
 					"id": "7",
-					"title": "组织架构",
+					"title": "数据保险箱",
 					"index": "Organize"
 				}, {
 					"id": "8",
-					"title": "岗位管理",
+					"title": "文件夹同步",
 					"index": "TableManage"
 				}, {
 					"id": "9",
-					"title": "成员管理",
+					"title": "数据库备份",
 					"index": "PersonManage"
 				}],
 				"is_select": 0
 			}, {
 				"id": "5",
-				"title": "行政管理",
+				"title": "数据源列表",
 				"IconType": "laptop",
 				"index": "",
 				"child": [{
@@ -44,7 +44,7 @@ module.exports = {
 				"is_select": 0
 			}, {
 				"id": "6",
-				"title": "人事管理",
+				"title": "回收站",
 				"IconType": "notification",
 				"index": "",
 				"child": [{

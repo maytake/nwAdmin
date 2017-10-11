@@ -3,7 +3,9 @@ import { Link } from 'react-router'
 import { is, fromJS } from 'immutable';
 import { Form, Icon, Row, Col, Input, Modal, Button, } from 'antd';
 import AddForm from './TableForm.jsx'
-
+import './centerModal.less'
+import * as Request from '../../../../fetch/center/index.js'
+import Base from '../../../../util/base.js'
 class TableAdd extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -15,8 +17,43 @@ class TableAdd extends React.Component {
     shouldComponentUpdate(nextProps, nextState) {
         return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
     }
+    saveFormRef(form) {
+      this.form = form;
+    }
 
+    //创建和修改岗位弹窗 
+    handleForm() {
+        var that = this;
+        var form = this.form;
+        form.validateFields((err, params) => {
+          if (err) {
+            return;
+          }
+          this.setState({
+            confirmLoading: true
+          });
+          let _params = params
+          _params = Object.assign({}, params)
+          Request.addTableList(_params).then(data => {
+            Base.handleResult(data, function(result) {
+              that.setState({
+                confirmLoading: false,
+              });
+              that.props.handleClose();
+              form.resetFields();
+              //重新加载数据
+              let resdata = result.resultData.data
+              that.props.addListData(resdata)
+            }, function() {
+              that.setState({
+                confirmLoading: false,
+              });
+            })
+          })
 
+        });
+      
+    }
 
 
     //打开弹窗
@@ -24,7 +61,7 @@ class TableAdd extends React.Component {
       this.props.handleOpen()
     }
     handleOk(e) {
-        this.props.handleClose()
+        this.handleForm()
     }
     handleCancel(e) {
        this.props.handleClose()
@@ -35,17 +72,21 @@ class TableAdd extends React.Component {
         return (
             <div>
               <Modal
-                  title="Basic Modal"
+                  title="添加表格"
+                  confirmLoading={this.state.confirmLoading}
+                  wrapClassName="vertical-center-modal"
                   visible={this.props.visible}
                   onOk={this.handleOk.bind(this)}
                   onCancel={this.handleCancel.bind(this)}
                   >
-                  <AddForm/>
-
+                  <AddForm 
+                  ref={this.saveFormRef.bind(this)}
+                  handleForm={this.handleForm.bind(this)}
+                  />
               </Modal>
 
-              <Button type="primary" icon="plus-circle-o"  onClick={this.openModel.bind(this)}>
-                      Add
+              <Button type="primary" icon="plus-circle-o"  onClick={this.openModel.bind(this)} style={{position:"absolute",left:24,top:24}}>
+                      添加
               </Button>
             </div>
         );

@@ -27,7 +27,7 @@ export default {
                     title: '系统提示',
                     content: result.resultMsg,
                     onOk() {
-                        that.loginOut();
+                        that.loginOutThing();
                     }
                 });
                 this.tipForm = true;
@@ -42,6 +42,15 @@ export default {
                 hashHistory.push('/Login');
             })
         })
-    }
+    },
+    //删除含有undefined字段
+    delUndefinedCode(obj){
+        Object.keys(obj).forEach((item)=>{
+            if(obj[item]==undefined){
+                delete obj[item]
+            }
+        })
+        return obj;
+    },
 
 }

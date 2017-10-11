@@ -70,7 +70,8 @@ class App extends React.Component {
                             <Head />
                             <Content style={{
                                     margin: '20px 20px 0',
-                                    position: "relative"
+                                    position: "relative",
+                                    overflow: 'initial'
                                 }}>
                                 <Breadcrumb style={{
                                     margin: '0 0 6px'

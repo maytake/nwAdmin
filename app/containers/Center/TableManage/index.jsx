@@ -9,8 +9,9 @@ import * as Request from '../../../fetch/center/index.js'
 import { PAGECONF } from '../../../config/localStoreKey.js'
 import Base from '../../../util/base.js'
 
-//添加栏
+//添加栏和搜索
 import TableAdd from './subPage/TableAdd.jsx'
+import TableSearch from './subPage/TableSearch.jsx'
 
 
 class TableManage extends React.Component {
@@ -42,18 +43,29 @@ class TableManage extends React.Component {
         });
         let that = this;
         Request.getTableList(params).then(data => {
-        
           Base.handleResult(data, function(data) {
               let datalist = data.resultData.data;
+              let pager =  Object.assign({}, that.state.pagination, {
+                    total: parseInt(datalist.count)
+                })
               that.setState({
-                data:datalist,
+                data:datalist.list,
+                pagination:pager,
                 loading: false
               })
           })
         })
 
     }
-    //删除row
+
+    //添加表格
+    addListData(data) {
+        this.setState({
+            data
+        })
+    }
+    
+    //删除一行表格
     delRow(id){
         this.setState({
             loading: true
@@ -74,9 +86,11 @@ class TableManage extends React.Component {
             })
         })
     }
-
-
-
+    //搜索内容
+    searchTable(){
+        const {}=this.state;
+        this.getListData()
+    }
     //打开弹窗
     handleOpen(){
         this.setState({
@@ -128,8 +142,10 @@ class TableManage extends React.Component {
                     visible={this.state.visible} 
                     handleOpen={this.handleOpen.bind(this)} 
                     handleClose={this.handleClose.bind(this)}
-
+                    getListData = {this.getListData.bind(this)}
+                    addListData = {this.addListData.bind(this)}
                     />
+                    <TableSearch/>
                 </div>
                 <div className="ant-table-wrapper TableList">
                     <Table 
