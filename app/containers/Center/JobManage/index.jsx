@@ -114,6 +114,14 @@ class JobManage extends React.Component {
 
 
     render() {
+        const rowSelection = {
+          onChange: (selectedRowKeys, selectedRows) => {
+            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+          },
+          getCheckboxProps: record => ({
+            disabled: record.key === 5,    
+          }),
+        };
         const columns = [{
             title: '岗位编号',
             width: '40%',
@@ -163,6 +171,7 @@ class JobManage extends React.Component {
             onChangeSearch = {this.onChangeSearch.bind(this)}
             />
         		<Table
+            rowSelection={rowSelection} 
             dataSource={this.state.data}
             pagination={this.state.pagination}
             columns={columns}

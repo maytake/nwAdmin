@@ -10,7 +10,9 @@ import { PAGECONF } from '../../../config/localStoreKey.js'
 import Base from '../../../util/base.js'
 
 //添加栏和搜索
-import TableAdd from './subPage/TableAdd.jsx'
+import ModalForm from './subPage/ModalForm.jsx'
+
+
 import TableSearch from './subPage/TableSearch.jsx'
 
 
@@ -25,7 +27,8 @@ class TableManage extends React.Component {
             isVisibleEdit: false,
             keyWord: "",
             record: {}, //单行当数据
-            loading: false
+            loading: false,
+            editId:"",
         }
     }
 
@@ -59,7 +62,7 @@ class TableManage extends React.Component {
     }
 
     //添加表格
-    addListData(data) {
+    reloadListData(data) {
         this.setState({
             data
         })
@@ -74,16 +77,32 @@ class TableManage extends React.Component {
         Request.addTableList({
             id: id
         }).then(data=>{
-            
             Base.handleResult(data, function(data){
-                console.log(data)
                 let datalist=data.resultData.data;
-                console.log(datalist);
                 _this.setState({
                     data:datalist,
                     loading: false
                 })
             })
+        })
+    }
+
+    //添加显示
+    addShowModel(){
+
+        this.setState({
+            visible:true,
+            isVisibleEdit:false
+        })
+    }
+
+    //编辑表格
+    editListData(id){
+          
+         this.setState({
+            visible:true,
+            isVisibleEdit:true,
+            editId : id
         })
     }
     //搜索内容
@@ -120,7 +139,14 @@ class TableManage extends React.Component {
              visible:false
         })
     }
+
     render() {
+        const rowSelection = {
+          onChange: (selectedRowKeys, selectedRows) => {
+            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+          }
+
+        };
         const columns = [
             { title: 'Full Name', width: 100, dataIndex: 'name', key: 'name', fixed: 'left' },
             { title: 'Age', width: 100, dataIndex: 'age', key: 'age', fixed: 'left' },
@@ -140,7 +166,7 @@ class TableManage extends React.Component {
                 render: (text, record, index) => {
                     return(
                         <div>
-                        <Button size="small" type="primary" icon="delete" style={{
+                        <Button onClick={this.editListData.bind(this, record.key)} size="small" type="primary" icon="delete" style={{
                                 marginRight: 5
                             }}>编辑</Button>
                             
@@ -161,17 +187,25 @@ class TableManage extends React.Component {
 
                 <div >
                     
-                    <TableAdd 
-                    visible={this.state.visible} 
+                    <ModalForm 
+                    visible={this.state.visible}
+                    isVisibleEdit={this.state.isVisibleEdit} 
                     handleOpen={this.handleOpen.bind(this)} 
                     handleClose={this.handleClose.bind(this)}
                     getListData = {this.getListData.bind(this)}
-                    addListData = {this.addListData.bind(this)}
+                    reloadListData = {this.reloadListData.bind(this)}
+                    editId = {this.state.editId}
                     />
+                    <Button type="primary" icon="plus-circle-o"  onClick={this.addShowModel.bind(this)} style={{position:"absolute",left:24,top:24}}>
+                      添加
+                    </Button>
+
+
                     <TableSearch searchTable={this.searchTable.bind(this)}/>
                 </div>
                 <div className="ant-table-wrapper TableList">
-                    <Table 
+                    <Table
+                    rowSelection={rowSelection} 
                     columns={columns} 
                     dataSource={this.state.data}
                     pagination={this.state.pagination} 
