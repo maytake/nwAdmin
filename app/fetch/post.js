@@ -47,3 +47,4 @@ export function post(url, paramsObj) {
 
     return result;
 }
+//url=http://192.168.1.56:8080/ebeim-api/test/manager/customer/list

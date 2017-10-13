@@ -26,6 +26,8 @@ class TableManage extends React.Component {
             visible: false, //控制编辑窗口的现实隐藏
             isVisibleEdit: false,
             keyWord: "",
+            selectRange:"",
+            timePicker:"",
             record: {}, //单行当数据
             loading: false,
             editId:"",
@@ -112,6 +114,8 @@ class TableManage extends React.Component {
         });
         this.setState({
             keyWord: values.keyWord ? values.keyWord : "",
+            timePicker: values.timePicker ? values.timePicker : "",
+            selectRange: values.selectRange ? values.selectRange : "",
             pagination: pager
         },()=>{
             this.getSearchTable()
@@ -120,11 +124,14 @@ class TableManage extends React.Component {
     }
     //获取搜索
     getSearchTable(){
-        const {pagination, keyWord}=this.state;
+        const {pagination, keyWord, timePicker, selectRange}=this.state;
+        console.log(timePicker)
         this.getListData({
             pagesize: pagination.pageSize,
             p: pagination.current,
-            keyWord: keyWord
+            keyWord: keyWord,
+            timePicker:timePicker,
+            selectRange:selectRange
         })
     }
     //打开弹窗
@@ -157,7 +164,7 @@ class TableManage extends React.Component {
             { title: 'Column 5', dataIndex: 'address', key: '5', width: 150 },
             { title: 'Column 6', dataIndex: 'address', key: '6', width: 150 },
             { title: 'Column 7', dataIndex: 'address', key: '7', width: 150 },
-            { title: 'Column 8', dataIndex: 'address', key: '8' },
+            { title: 'Column 8', dataIndex: 'address', key: '8', width: 150  },
             {
                 title: 'Action',
                 key: 'operation',

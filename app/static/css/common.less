@@ -73,78 +73,50 @@ input {
 .BottomTool {
     margin-top: 20px;
 }
-.showFormList {
-    .listWrap {
-        overflow: hidden;
-        margin-bottom: 15px;
 
-        .name {
-            width: 15%;
-            text-align: right;
-            margin-right: 3%;
-            float: left;
-        }
-        .txt {
-            width: 75%;
-            float: left;
-        }
-    }
+//伸缩表格
+.ant-layout.ant-layout-has-sider > .ant-layout, .ant-layout.ant-layout-has-sider > .ant-layout-content {
+    overflow-x: hidden;
 }
-.GlobalCountInfo {
-    position: absolute;
-    right: 0;
-    top: 0;
-    font-size: 18px;
 
-    .color {
-        color: #ff7e5f;
-        font-size: 24px;
-    }
-}
-.color_warning {
-    color: #ff7e5f;
-}
-.countTable {
-    width: 96%;
-    background: #ecf6fd;
-    padding: 20px;
-    border-radius: 10px;
-    position: absolute;
-    left: 2%;
-    bottom: 30px;
 
-    .row {
-        width: 100%;
-        overflow: hidden;
-        color: #108ee9;
-        font-size: 13px;
-        margin-bottom: 5px;
 
-        &:nth-child(2) {
-            margin-bottom: 0;
-            font-size: 16px;
-        }
-    }
-    .col {
-        width: 10%;
-        text-align: center;
-        float: left;
+::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+}
 
-        &:nth-child(2) {
-            width: 5%;
-        }
-        &:nth-child(1) {
-            width: 4%;
-        }
-        &.specCol {
-            text-indent: -2000rem;
-        }
-    }
+::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
 }
-.SalaryWrap {
-    padding-bottom: 120px;
-    position: relative;
+
+::-webkit-scrollbar-thumb {
+    background-color: #999;
 }
-.Datew100 {
-    width: 100%
+
+
+
+
+
+::-webkit-scrollbar
+{
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track-piece
+{
+    background-color: #CCCCCC;
+    -webkit-border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:vertical
+{
+    height: 5px;
+    background-color: #999999;
+    -webkit-border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:horizontal
+{
+    width: 5px;
+    background-color: #999999;
+    -webkit-border-radius: 6px;
 }

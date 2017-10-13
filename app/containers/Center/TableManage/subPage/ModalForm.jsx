@@ -27,7 +27,7 @@ class ModalForm extends React.Component {
         var form = this.form;
         let isEditShow = this.props.isVisibleEdit
        if(isEditShow){
-          console.log('编辑')
+          //编辑状态下的弹窗
           form.validateFields((err, params) => {
             if (err) {
               return;

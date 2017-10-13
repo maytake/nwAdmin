@@ -28,7 +28,7 @@ class TableSearch extends React.Component {
             timePicker:"",
             selectRange:""
       });
-      that.props.searchTable({
+      this.props.searchTable({
             keyWord: "",
             timePicker:"",
             selectRange:""
@@ -51,7 +51,7 @@ class TableSearch extends React.Component {
         return (
             <Form className="ant-advanced-search-form" onSubmit={this.handleSearch.bind(this)} >
                 <Row gutter={16} type="flex" justify="end">
-                    <Col span={6}>
+                    <Col span={7}>
                         <FormItem
                           {...formItemLayout}
                           label=" 请选择日期"
@@ -64,16 +64,16 @@ class TableSearch extends React.Component {
 
                     <Col span={6}>
                         <FormItem label="岗位名称" layout="vertical"  
-                         {...formItemLayout}>
-                            {getFieldDecorator('keyWord', {
-                                initialValue: '',
-                                rules: [{
-                                    required: true,
-                                    message: '请输入20个字以内的名称'
-                                }],
-                            })(
-                                <Input />
-                            )}
+                          {...formItemLayout}>
+                          {getFieldDecorator('keyWord', {
+                              initialValue: '',
+                              rules: [{
+                                  required: true,
+                                  message: '请输入20个字以内的名称'
+                              }],
+                          })(
+                              <Input />
+                          )}
                         </FormItem>
                     </Col>
 
@@ -81,7 +81,7 @@ class TableSearch extends React.Component {
                         <FormItem
                           {...formItemLayout}
                           label="查找范围"
-                        >
+                          >
                           {getFieldDecorator('selectRange', {
                             rules: [
                               { required: true, message: '请选择范围' },
@@ -96,7 +96,7 @@ class TableSearch extends React.Component {
                         </FormItem>
                     </Col>
 
-                    <Col span={2}>
+                    <Col span={3}>
                         <div className="searchButton">
                             <Button type="primary" htmlType="submit"  style={{
                                 marginRight: 4,

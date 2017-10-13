@@ -28,7 +28,7 @@ module.exports = {
 					"title": "数据库备份",
 					"index": "PersonManage"
 				}],
-				"is_select": 0
+				
 			}, {
 				"id": "5",
 				"title": "数据源列表",
@@ -39,9 +39,9 @@ module.exports = {
 					"title": "资产管理",
 					"index": "PropertyManage",
 					"child": [],
-					"is_select": 0
+					
 				}],
-				"is_select": 0
+				
 			}, {
 				"id": "6",
 				"title": "回收站",
@@ -56,16 +56,16 @@ module.exports = {
 						"title": "导入薪资",
 						"index": "",
 						"child": [],
-						"is_select": 0
+						
 					}],
-					"is_select": 0
+					
 				}, {
 					"id": "60",
 					"title": "我的薪资",
 					"child": [],
-					"is_select": 0
+					
 				}],
-				"is_select": 0
+				
 			}]
 		}, {
 			"id": "2",
@@ -85,11 +85,11 @@ module.exports = {
 						"title": "获取亚马逊店铺列表",
 						"index": "",
 						"child": [],
-						"is_select": 0
+						
 					}],
-					"is_select": 0
+					
 				}],
-				"is_select": 0
+				
 			}, {
 				"id": "82",
 				"title": "基础设置",
@@ -104,11 +104,11 @@ module.exports = {
 						"title": "获取全部地区列表",
 						"index": "",
 						"child": [],
-						"is_select": 0
+						
 					}],
-					"is_select": 0
+					
 				}],
-				"is_select": 0
+				
 			}]
 		}]
 	}
