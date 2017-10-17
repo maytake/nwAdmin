@@ -104,6 +104,7 @@ class ModalForm extends React.Component {
         return (
             <div>
               <Modal
+                  width = '820px'
                   title="添加表格"
                   confirmLoading={this.state.confirmLoading}
                   wrapClassName="vertical-center-modal"
