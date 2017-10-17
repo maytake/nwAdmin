@@ -4,6 +4,7 @@ import 'es6-promise'
 
 export function get(url) {
 	var result = fetch(url, {
+		mode: "cors",
 		credentials: 'include',
 		headers: {
 			'Access-Control-Allow-Origin': '*',

@@ -11,6 +11,9 @@ import { PAGECONF } from '../../../config/localStoreKey.js'
 import Base from '../../../util/base.js'
 import JobSearch from './subPage/JobSearch'
 import JobTool from './subPage/JobTool'
+import {post} from '../../../fetch/post.js'
+
+
 
 class JobManage extends React.Component {
     constructor(props, context) {
@@ -112,6 +115,18 @@ class JobManage extends React.Component {
         })
     }
 
+    sub(){
+        const k =  post('http://192.168.1.56:8080/ebeim-api/test/manager/customer/list', {})
+        k.then(data => {
+             console.log("::"+data)
+        })
+       /* const k =  get('http://192.168.0.113/')
+        console.log(k)
+        k.then(data => {
+             console.log("::"+data)
+        })*/
+       
+    }
 
     render() {
         const rowSelection = {
@@ -178,7 +193,9 @@ class JobManage extends React.Component {
             loading={this.state.loading}
             rowKey={record => record.role_id}
             bordered/>
-        	
+        	   
+                <button onClick={this.sub.bind(this)}>fetch</button>
+
         	</div>
 
         )

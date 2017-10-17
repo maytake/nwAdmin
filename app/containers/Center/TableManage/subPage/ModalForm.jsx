@@ -86,8 +86,6 @@ class ModalForm extends React.Component {
           });
        }
 
-
-
       
     }
 

@@ -8,7 +8,7 @@ module.exports = {
 
   entry: {
     app: path.resolve(__dirname, 'app/index.jsx'),
-    // 将 第三方依赖 单独打包
+
     vendor: [
       'react',
       'react-dom',
@@ -59,19 +59,12 @@ module.exports = {
 
   plugins: [
 
-    // html 模板插件
+ 
     new HtmlWebpackPlugin({
       template: __dirname + '/app/index.tmpl.html'
     }),
 
-    // 定义为生产环境，编译 React 时压缩到最小
-    /* new webpack.DefinePlugin({
-       'process.env': {
-         'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-       }
-     }),*/
 
-    // 为组件分配ID，通过这个插件webpack可以分析和优先考虑使用最多的模块，并为它们分配最小的ID
     new webpack.optimize.OccurenceOrderPlugin(),
 
     new webpack.optimize.UglifyJsPlugin({
@@ -93,7 +86,6 @@ module.exports = {
       filename: '[name].[chunkhash:8].js'
     }),
 
-    // 可在业务 js 代码中使用 __DEV__ 判断是否是dev模式（dev模式下可以提示错误、测试报告等, production模式不提示）
     new webpack.DefinePlugin({
       __DEV__: true,
       'process.env': {

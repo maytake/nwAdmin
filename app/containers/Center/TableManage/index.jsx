@@ -219,8 +219,8 @@ class TableManage extends React.Component {
                     loading={this.state.loading}
                     rowKey={record => record.key}
                     scroll={{
-                        x: 1500,
-                        y: 300
+                        x: 1500
+                      
                     }} />
                   </div>
             </div>
