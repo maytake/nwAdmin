@@ -1,9 +1,9 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect, } from 'react-redux'
-import { hashHistory } from 'react-router'
+import { hashHistory,Link,} from 'react-router'
 
-import { Modal, Layout, Icon, Button, Breadcrumb, Menu, message, Tooltip, BackTop } from 'antd';
+import { Modal,  Layout, Icon, Button, Breadcrumb, Menu, message, Tooltip, BackTop } from 'antd';
 
 const {SubMenu} = Menu;
 const {Header, Content, Sider} = Layout;
@@ -76,8 +76,8 @@ class App extends React.Component {
                                 <Breadcrumb style={{
                                     margin: '0 0 6px'
                                 }}>
-                                    <Breadcrumb.Item>首页</Breadcrumb.Item>
-                                    <Breadcrumb.Item>列表页</Breadcrumb.Item>
+                                    <Breadcrumb.Item><Link to="/">首页</Link></Breadcrumb.Item>
+                                    <Breadcrumb.Item><Link to="/TableManage">列表页</Link></Breadcrumb.Item>
                                     <Breadcrumb.Item>详细页</Breadcrumb.Item>
                                 </Breadcrumb>
                                 <div style={{

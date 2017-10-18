@@ -41,7 +41,7 @@ class LeftMenuComponent extends React.Component {
             collapsed={this.props.collapsed}
             >
                       
-                           <div className="logo" />
+                            <Link to="/"><div className="logo" /></Link>
                             <Menu
                                 onClick={this.handleClick.bind(this)}
                                 defaultOpenKeys={[defOpenKeys]}

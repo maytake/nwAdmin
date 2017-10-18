@@ -32,6 +32,9 @@ class JobManage extends React.Component {
 
     componentDidMount() {
         this.getGWListData();
+       /* post('http://192.168.1.56:8080/ebeim-api/home/index/getmenu',{}).then(data=>{
+            
+        })*/
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -115,18 +118,7 @@ class JobManage extends React.Component {
         })
     }
 
-    sub(){
-        const k =  post('http://192.168.1.56:8080/ebeim-api/test/manager/customer/list', {})
-        k.then(data => {
-             console.log("::"+data)
-        })
-       /* const k =  get('http://192.168.0.113/')
-        console.log(k)
-        k.then(data => {
-             console.log("::"+data)
-        })*/
-       
-    }
+
 
     render() {
         const rowSelection = {
@@ -194,7 +186,7 @@ class JobManage extends React.Component {
             rowKey={record => record.role_id}
             bordered/>
         	   
-                <button onClick={this.sub.bind(this)}>fetch</button>
+               
 
         	</div>
 

@@ -37,9 +37,9 @@ export function getMenuData(session) {
 
                 _firstMenu = _data;
                 dispatch(menu({
-                    firstMenu: _firstMenu,
-                    storeMenu: _secondMenu,
-                    secondMenu: nowSecondMenu
+                    firstMenu: _firstMenu,//初始总数据
+                    storeMenu: _secondMenu,//配置总数据
+                    secondMenu: nowSecondMenu//当前数据
                 }))
             })
         })

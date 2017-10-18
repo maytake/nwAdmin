@@ -47,7 +47,6 @@ class HeadCompontent extends React.Component {
         localStore.setItem(CURFIRSTMENU, item.key);
 
 
-
     }
     toggle() {
         let collapsedInfo = this.props.collapsed;
@@ -88,12 +87,12 @@ class HeadCompontent extends React.Component {
             onClick={this.clickMenu.bind(this)}
             >
 
-                 {
-            firstMenu.map(item => {
-                return (
-                    <Menu.Item key={item.index}><Link to={item.index}>{item.title}</Link></Menu.Item>
-                )
-            })
+            {
+                firstMenu.map(item => {
+                    return (
+                        <Menu.Item key={item.index}><Link to={item.index}>{item.title}</Link></Menu.Item>
+                    )
+                })
             }
                 </Menu>
             
