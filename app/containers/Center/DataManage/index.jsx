@@ -11,12 +11,10 @@ import Base from '../../../util/base.js'
 
 //添加栏和搜索
 import ModalForm from './subPage/ModalForm.jsx'
-
-
 import TableSearch from './subPage/TableSearch.jsx'
 
 
-class TableManage extends React.Component {
+class TableManageList extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -35,19 +33,27 @@ class TableManage extends React.Component {
     }
 
     componentDidMount() {
-        this.getListData();
+        let getTableListFn = this.props.getTableListFn;
+        this.getListData({},getTableListFn);
+
+
     }
 
     shouldComponentUpdate(nextProps, nextState) {
         return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
     }
+
     //获取表格数据
-    getListData(params = {}) {
+    getListData(params = {},fn) {
+        console.log(fn+"test")
+        if(!(typeof fn == 'function')){
+            return 
+        } 
         this.setState({
             loading: true
         });
         let that = this;
-        Request.getTableList(params).then(data => {
+        fn(params).then(data => {
           Base.handleResult(data, function(data) {
               let datalist = data.resultData.data;
               let pager =  Object.assign({}, that.state.pagination, {
@@ -71,12 +77,15 @@ class TableManage extends React.Component {
     }
     
     //删除一行表格
-    delRow(id){
+    delRow(id,fn){
+        if(!(typeof fn == 'function')){
+            return 
+        } 
         this.setState({
             loading: true
         });
         var _this=this;
-        Request.addTableList({
+        fn({
             id: id
         }).then(data=>{
             Base.handleResult(data, function(data){
@@ -100,7 +109,7 @@ class TableManage extends React.Component {
 
     //编辑表格
     editListData(id){
-          
+
          this.setState({
             visible:true,
             isVisibleEdit:true,
@@ -125,7 +134,6 @@ class TableManage extends React.Component {
     //获取搜索
     getSearchTable(){
         const {pagination, keyWord, timePicker, selectRange}=this.state;
-        console.log(timePicker)
         this.getListData({
             pagesize: pagination.pageSize,
             p: pagination.current,
@@ -154,7 +162,8 @@ class TableManage extends React.Component {
           }
 
         };
-        const columns = [
+      
+       /* const columns = [
             { title: 'Full Name', width: 100, dataIndex: 'name', key: 'name', fixed: 'left' },
             { title: 'Age', width: 100, dataIndex: 'age', key: 'age', fixed: 'left' },
             { title: 'Column 1', dataIndex: 'address', key: '1', width: 150 },
@@ -188,12 +197,11 @@ class TableManage extends React.Component {
 
                 },
             },
-        ];
+        ];*/
         return (
             <div>
 
-                <div >
-                    
+                <div>  
                     <ModalForm 
                     visible={this.state.visible}
                     isVisibleEdit={this.state.isVisibleEdit} 
@@ -206,14 +214,14 @@ class TableManage extends React.Component {
                     <Button type="primary" icon="plus-circle-o"  onClick={this.addShowModel.bind(this)} style={{position:"absolute",left:24,top:24}}>
                       添加
                     </Button>
-                    <div>1234就发发送大嫁风尚12</div>
+                  
 
                     <TableSearch searchTable={this.searchTable.bind(this)}/>
                 </div>
                 <div className="ant-table-wrapper TableList">
                     <Table
                     rowSelection={rowSelection} 
-                    columns={columns} 
+                    columns={this.props.columns} 
                     dataSource={this.state.data}
                     pagination={this.state.pagination} 
                     loading={this.state.loading}
@@ -233,4 +241,4 @@ class TableManage extends React.Component {
 
 
 
-export default TableManage
+export default TableManageList

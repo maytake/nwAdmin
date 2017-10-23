@@ -30,7 +30,7 @@ class RouterMap extends React.Component {
                     <IndexRedirect to="/Organize"/>
                     <Route path='/Organize' getComponent={Action.JobManage}/>
                     <Route path='/TableManage' getComponent={Action.TableManage}/>
-                    <Route path='/DataManage' getComponent={Action.DataManage}/>
+                    <Route path='/tableA' getComponent={Action.tableA}/>
                     <Route path='*' component={NotFound}/>
                 </Route>
                 <Route path='/erp' component={App}>

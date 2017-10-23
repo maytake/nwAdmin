@@ -26,7 +26,7 @@ module.exports = {
 				}, {
 					"id": "9",
 					"title": "数据库备份",
-					"index": "DataManage"
+					"index": "tableA"
 				}],
 				
 			}, {

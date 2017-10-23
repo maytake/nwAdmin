@@ -8,13 +8,13 @@ const TableManage = (location, cb) => {
 		cb(null, require('../../containers/Center/TableManage').default)
 	}, 'TableManage')
 }
-const DataManage = (location, cb) => {
+const tableA = (location, cb) => {
 	require.ensure([], require => {
-		cb(null, require('../../containers/Center/DataManage').default)
-	}, 'DataManage')
+		cb(null, require('../../containers/Center/CommonTable/tableA.jsx').default)
+	}, 'tableA')
 }
 export default {
 	JobManage,
 	TableManage,
-	DataManage
+	tableA
 }
