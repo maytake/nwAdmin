@@ -38,7 +38,7 @@ class ModalForm extends React.Component {
             let _params = params
             let editId = this.props.editId;
             _params = Object.assign({}, params,{id:editId})
-            Request.delTableList(_params).then(data => {
+            Request.editTableList(_params).then(data => {
               Base.handleResult(data, function(result) {
                 that.setState({
                   confirmLoading: false,

@@ -34,9 +34,7 @@ class TableManageList extends React.Component {
 
     componentDidMount() {
         let getTableListFn = this.props.getTableListFn;
-        this.getListData({},getTableListFn);
-
-
+        this.getListData({}, getTableListFn);
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -44,16 +42,16 @@ class TableManageList extends React.Component {
     }
 
     //获取表格数据
-    getListData(params = {},fn) {
-        console.log(fn+"test")
+    getListData(params = {}, fn) {
         if(!(typeof fn == 'function')){
-            return 
+            fn=this.props.getTableListFn
         } 
         this.setState({
             loading: true
         });
         let that = this;
         fn(params).then(data => {
+            //处理获取的数据
           Base.handleResult(data, function(data) {
               let datalist = data.resultData.data;
               let pager =  Object.assign({}, that.state.pagination, {
@@ -79,7 +77,7 @@ class TableManageList extends React.Component {
     //删除一行表格
     delRow(id,fn){
         if(!(typeof fn == 'function')){
-            return 
+            fn=this.props.delTableListFn
         } 
         this.setState({
             loading: true
@@ -100,22 +98,23 @@ class TableManageList extends React.Component {
 
     //添加显示
     addShowModel(){
-
         this.setState({
             visible:true,
             isVisibleEdit:false
         })
     }
 
-    //编辑表格
+    //编辑显示
     editListData(id){
-
          this.setState({
             visible:true,
             isVisibleEdit:true,
             editId : id
         })
     }
+
+
+
     //搜索内容
     searchTable(values){
         let pager = Object.assign({}, this.state.pagination, {
@@ -142,6 +141,10 @@ class TableManageList extends React.Component {
             selectRange:selectRange
         })
     }
+
+
+
+
     //打开弹窗
     handleOpen(){
         this.setState({
@@ -162,42 +165,7 @@ class TableManageList extends React.Component {
           }
 
         };
-      
-       /* const columns = [
-            { title: 'Full Name', width: 100, dataIndex: 'name', key: 'name', fixed: 'left' },
-            { title: 'Age', width: 100, dataIndex: 'age', key: 'age', fixed: 'left' },
-            { title: 'Column 1', dataIndex: 'address', key: '1', width: 150 },
-            { title: 'Column 2', dataIndex: 'address', key: '2', width: 150 },
-            { title: 'Column 3', dataIndex: 'address', key: '3', width: 150 },
-            { title: 'Column 4', dataIndex: 'address', key: '4', width: 150 },
-            { title: 'Column 5', dataIndex: 'address', key: '5', width: 150 },
-            { title: 'Column 6', dataIndex: 'address', key: '6', width: 150 },
-            { title: 'Column 7', dataIndex: 'address', key: '7', width: 150 },
-            { title: 'Column 8', dataIndex: 'address', key: '8', width: 150  },
-            {
-                title: 'Action',
-                key: 'operation',
-                fixed: 'right',
-                width: 150,
-                render: (text, record, index) => {
-                    return(
-                        <div>
-                        <Button onClick={this.editListData.bind(this, record.key)} size="small" type="primary" icon="delete" style={{
-                                marginRight: 5
-                            }}>编辑</Button>
-                            
-                        <Popconfirm  title="确定删除该岗位吗？" onConfirm={this.delRow.bind(this, record.key)} okText="是" cancelText="否">
-                          <Button size="small" type="danger" icon="delete" style={{
-                                marginRight: 5
-                            }}>删除</Button>
-                        
-                        </Popconfirm>
-                        </div>
-                        )
 
-                },
-            },
-        ];*/
         return (
             <div>
 

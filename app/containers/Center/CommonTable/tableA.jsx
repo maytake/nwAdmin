@@ -3,6 +3,11 @@ import { Link } from 'react-router'
 import { is, fromJS } from 'immutable';
 import { message, Form, Row, Col, Input, Modal, Icon, Button, Table, Popconfirm, Tooltip } from 'antd';
 
+import { bindActionCreators } from 'redux'
+import { connect, } from 'react-redux'
+import * as actionT from '../../../actions/requestTabFn.js'
+
+
 
 import TableManageList from '../DataManage'
 import * as Request from '../../../fetch/center/index.js'
@@ -10,24 +15,35 @@ import Base from '../../../util/base.js'
 
 class TableManage extends React.Component {
     constructor(props, context) {
-        super(props, context);
-
-        
+        super(props, context);       
         this.state = {
             columns:'',
             getTableListFn:Request.getTableList,
-            delTableListFn:Request.delTableList
+            editListDataFn:Request.editListData,
+            delTableListFn:Request.delTableList,
         }
     }
     componentDidMount() {
-        
+        //修改获取data的方法----Request.getTableList
+        this.refs.parentsEvents.getListData({}, this.state.getTableListFn)
+        console.log(this.props.tableFn+":---------------")
+     
+        console.log(this.props.delTableFn({age:'12'}))
+        console.log(this.props.editTableFn({name:'a'}))
     }
-    parentsEvents(TableManageList){
-        //获取表格
-        /*TableManageList.getListData({},Request.getTableList);
-        TableManageList.delRow(id,Request.delTableList);*/
-        
+    editListDataF(id){
+        //修改编辑data的方法
+        this.refs.parentsEvents.editListData(id)
     }
+    delRowF(id){
+        //修改删除哪一行data的方法-----Request.getTableList
+        this.refs.parentsEvents.delRow(id, this.state.delTableListFn)
+    }
+
+
+
+
+
 
     shouldComponentUpdate(nextProps, nextState) {
         return !is(fromJS(this.props), fromJS(nextProps)) || !is(fromJS(this.state), fromJS(nextState))
@@ -54,16 +70,16 @@ class TableManage extends React.Component {
                 render: (text, record, index) => {
                     return(
                         <div>
-                        <Button onClick={this.editListData.bind(this, record.key)} size="small" type="primary" icon="delete" style={{
-                                marginRight: 5
-                            }}>编辑</Button>
+                            <Button onClick={this.editListDataF.bind(this, record.key)} size="small" type="primary" icon="delete" style={{
+                                    marginRight: 5
+                                }}>编辑</Button>
+                                
+                            <Popconfirm  title="确定删除该岗位吗？" onConfirm={this.delRowF.bind(this, record.key)} okText="是" cancelText="否">
+                              <Button size="small" type="danger" icon="delete" style={{
+                                    marginRight: 5
+                                }}>删除</Button>
                             
-                        <Popconfirm  title="确定删除该岗位吗？" onConfirm={this.delRow.bind(this, record.key)} okText="是" cancelText="否">
-                          <Button size="small" type="danger" icon="delete" style={{
-                                marginRight: 5
-                            }}>删除</Button>
-                        
-                        </Popconfirm>
+                            </Popconfirm>
                         </div>
                         )
 
@@ -72,19 +88,38 @@ class TableManage extends React.Component {
         ];
         return(
                 <TableManageList 
-                ref={this.parentsEvents.bind(this)} 
+                ref="parentsEvents"
                 columns={columns}
                 getTableListFn={this.state.getTableListFn}
                 delTableListFn={this.state.delTableListFn}
-                editListData= {this.editListData.bind(this, record.key)}
-                delRow= {this.delRow.bind(this, record.key)}
+                editListDataFn={this.state.editListDataFn}
                  />
-                
-                
-                
+
             )
     }
 
 }
 
-export default TableManage
+// ------------------- 绑定 --------------------
+
+// ------------------- 绑定 --------------------
+
+function mapStateToProps(state) {
+    return {
+        tableFn: state.requestTabFn
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        editTableFn: bindActionCreators(actionT.editTableFn, dispatch),
+        delTableFn: bindActionCreators(actionT.delTableFn, dispatch)
+    }
+}
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(TableManage)
+
+
+

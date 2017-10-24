@@ -1,8 +1,6 @@
 import {COllAPSED} from '../constants/collapsed.js'
 
-const initialState = false
-
-export default function collapsed(state = initialState, action) {
+export default function collapsed(state = false, action) {
 	switch (action.type) {
 		case COllAPSED:
 			return action.data
