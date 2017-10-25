@@ -170,7 +170,8 @@ class TableManageList extends React.Component {
             <div>
 
                 <div>  
-                    <ModalForm 
+                    <ModalForm
+                    editListDataFn={this.props.editListDataFn}
                     visible={this.state.visible}
                     isVisibleEdit={this.state.isVisibleEdit} 
                     handleOpen={this.handleOpen.bind(this)} 

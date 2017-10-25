@@ -19,17 +19,14 @@ class TableManage extends React.Component {
         this.state = {
             columns:'',
             getTableListFn:Request.getTableList,
-            editListDataFn:Request.editListData,
+            editListDataFn:Request.editTableList,
             delTableListFn:Request.delTableList,
         }
     }
     componentDidMount() {
         //修改获取data的方法----Request.getTableList
         this.refs.parentsEvents.getListData({}, this.state.getTableListFn)
-        console.log(this.props.tableFn+":---------------")
-     
-        console.log(this.props.delTableFn({age:'12'}))
-        console.log(this.props.editTableFn({name:'a'}))
+
     }
     editListDataF(id){
         //修改编辑data的方法
@@ -102,24 +99,6 @@ class TableManage extends React.Component {
 
 // ------------------- 绑定 --------------------
 
-// ------------------- 绑定 --------------------
-
-function mapStateToProps(state) {
-    return {
-        tableFn: state.requestTabFn
-    }
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        editTableFn: bindActionCreators(actionT.editTableFn, dispatch),
-        delTableFn: bindActionCreators(actionT.delTableFn, dispatch)
-    }
-}
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(TableManage)
-
+export default TableManage
 
 

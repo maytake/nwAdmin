@@ -38,7 +38,7 @@ class ModalForm extends React.Component {
             let _params = params
             let editId = this.props.editId;
             _params = Object.assign({}, params,{id:editId})
-            Request.editTableList(_params).then(data => {
+            this.props.editListDataFn(_params).then(data => {
               Base.handleResult(data, function(result) {
                 that.setState({
                   confirmLoading: false,
@@ -66,7 +66,7 @@ class ModalForm extends React.Component {
             });
             let _params = params
             _params = Object.assign({}, params)
-            Request.addTableList(_params).then(data => {
+            this.props.editListDataFn(_params).then(data => {
               Base.handleResult(data, function(result) {
                 that.setState({
                   confirmLoading: false,

@@ -1,4 +1,5 @@
 import * as Action from '../constants/requestTabFn.js'
+import { post } from '../fetch/post.js'
 
 export function editTableFn(fn) {
     return {
@@ -6,9 +7,14 @@ export function editTableFn(fn) {
         data:fn
     }
 }
-export function delTableFn(fn) {
-    return {
-        type:Action.DELTABLE,
-        data:fn
+
+export function delTableFn2() {
+    return (dispatch)=>{
+    	return post('/home/index/getmenu').then(data => {
+    		dispatch({
+		        type:Action.DELTABLE,
+		        data
+    		})
+    	})
     }
 }
