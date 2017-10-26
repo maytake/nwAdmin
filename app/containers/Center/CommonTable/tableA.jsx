@@ -49,9 +49,15 @@ class TableManage extends React.Component {
 
         //划分表格行列
         const columns = [
-            { title: 'Full Name', width: 100, dataIndex: 'name', key: 'name', fixed: 'left' },
-            { title: 'Age', width: 100, dataIndex: 'age', key: 'age', fixed: 'left' },
-            { title: 'Column 1', dataIndex: 'address', key: '1', width: 150 },
+            { title: 'Full Name', width: 100, dataIndex: 'name', key: 'name', fixed: 'left',
+                sorter: (a, b) =>a.name.length - b.name.length,
+             },
+            { title: 'Age', width: 100, dataIndex: 'age', key: 'age', fixed: 'left',
+                sorter: (a, b) => a.age - b.age,
+             },
+            { title: 'Column 1', dataIndex: 'address', key: '1', width: 150, 
+                sorter: (a, b) => a.address - b.address,
+            },
             { title: 'Column 2', dataIndex: 'address', key: '2', width: 150 },
             { title: 'Column 3', dataIndex: 'address', key: '3', width: 150 },
             { title: 'Column 4', dataIndex: 'address', key: '4', width: 150 },
