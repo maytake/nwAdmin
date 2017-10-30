@@ -29,10 +29,10 @@ export function getMenuData(session) {
                 let _secondMenu = {};
                 let nowSecondMenu = [];
                 _data.map((item, index) => {
-                    if (item.index == localStore.getItem(CURFIRSTMENU)) {
+                    if (item.src == localStore.getItem(CURFIRSTMENU)) {
                         nowSecondMenu = item.child;
                     }
-                    _secondMenu[item.index] = item.child;
+                    _secondMenu[item.src] = item.child;
                 })
 
                 _firstMenu = _data;

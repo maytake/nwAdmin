@@ -62,13 +62,13 @@ class LeftMenuComponent extends React.Component {
                                             {
                                                 item.child.map(item2 => {
                                                     return (
-                                                        <Menu.Item key={item2.index}><Link to={'/' + item2.index}>{item2.title}</Link></Menu.Item>
+                                                        <Menu.Item key={item2.src}><Link to={'/' + item2.src}>{item2.title}</Link></Menu.Item>
                                                     )
                                                 })
                                             }
                                                                      
                                             </SubMenu> :
-                                            <Menu.Item key={item.index}><Link to={'/'}>{item.title}</Link></Menu.Item>
+                                            <Menu.Item key={item.src}><Link to={'/'}>{item.title}</Link></Menu.Item>
                                         )
 
                                     })

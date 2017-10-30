@@ -19,6 +19,201 @@ img {
 input {
     outline: none;
 }
+
+
+
+//伸缩表格
+.ant-layout.ant-layout-has-sider > .ant-layout, .ant-layout.ant-layout-has-sider > .ant-layout-content {
+    overflow-x: hidden;
+}
+
+//滚动条
+
+::-webkit-scrollbar-track {
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #999;
+}
+
+
+
+::-webkit-scrollbar
+{
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track-piece
+{
+    background-color: #CCCCCC;
+    -webkit-border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:vertical
+{
+    height: 5px;
+    background-color: #999999;
+    -webkit-border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:horizontal
+{
+    width: 5px;
+    background-color: #999999;
+    -webkit-border-radius: 6px;
+}
+
+
+// 常用配置
+
+.over-hidden {
+  display: block;
+  overflow: hidden;
+}
+.center {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+}
+.y-center {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+}
+.block {
+  display: block;
+}
+.inline {
+  display: inline;
+}
+.none {
+  display: none;
+}
+
+
+.b-white {
+  border-color: #ffffff;
+}
+.w-full {
+  width: 100%;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.w-auto {
+  width: auto;
+}
+.h-auto {
+  height: auto;
+}
+
+
+
+.pull-left {
+  float: left;
+}
+.pull-right {
+  float: right;
+}
+
+
+
+.no-padding .ant-card-body {
+  padding: 0 !important;
+}
+img {
+  vertical-align: middle;
+}
+.img-responsive {
+  width: 100%;
+  height: auto;
+}
+.img-circle {
+  border-radius: 50%;
+}
+
+
+//文字部分
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.text-danger,
+.text-danger-hover a:hover {
+  color: #f44455 !important;
+}
+.text-dark,
+.text-dark-hover a:hover {
+  color: #2e3e4e !important;
+}
+.text-info,
+.text-info-hover a:hover {
+  color: #6887ff !important;
+}
+.text-success,
+.text-success-hover a:hover {
+  color: #6cc788 !important;
+}
+.text-blue,
+.text-blue-hover a:hover {
+  color: #2196f3 !important;
+}
+.dark-white {
+  color: #2e3e4e;
+  background-color: #ffffff;
+}
+.min-black {
+  color: rgba(255, 255, 255, 0.87);
+  background-color: rgba(0, 0, 0, 0.065);
+}
+.black {
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #2a2b3c;
+}
+.dark {
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #2e3e4e;
+}
+.grey {
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #424242;
+}
+.primary {
+  color: #404040;
+  background-color: #0cc2aa;
+}
+.info {
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #6887ff;
+}
+.warn {
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #fcc100;
+}
+.danger {
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #f44455;
+}
+
+
+
+
+
 .float-left {
     float: left;
 }
@@ -74,49 +269,5 @@ input {
     margin-top: 20px;
 }
 
-//伸缩表格
-.ant-layout.ant-layout-has-sider > .ant-layout, .ant-layout.ant-layout-has-sider > .ant-layout-content {
-    overflow-x: hidden;
-}
 
 
-
-::-webkit-scrollbar-track {
-    background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar {
-    width: 6px;
-    background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: #999;
-}
-
-
-
-
-
-::-webkit-scrollbar
-{
-    width: 6px;
-    height: 6px;
-}
-::-webkit-scrollbar-track-piece
-{
-    background-color: #CCCCCC;
-    -webkit-border-radius: 6px;
-}
-::-webkit-scrollbar-thumb:vertical
-{
-    height: 5px;
-    background-color: #999999;
-    -webkit-border-radius: 6px;
-}
-::-webkit-scrollbar-thumb:horizontal
-{
-    width: 5px;
-    background-color: #999999;
-    -webkit-border-radius: 6px;
-}

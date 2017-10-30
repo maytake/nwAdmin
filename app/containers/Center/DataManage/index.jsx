@@ -180,12 +180,13 @@ class TableManageList extends React.Component {
                     reloadListData = {this.reloadListData.bind(this)}
                     editId = {this.state.editId}
                     />
-                    <Button type="primary" icon="plus-circle-o"  onClick={this.addShowModel.bind(this)} style={{position:"absolute",left:24,top:24}}>
-                      添加
-                    </Button>
-                  
 
                     <TableSearch searchTable={this.searchTable.bind(this)}/>
+
+                    <Button type="primary" icon="plus-circle-o"  onClick={this.addShowModel.bind(this)} style={{}}>
+                      添加
+                    </Button>
+                    
                 </div>
                 <div className="ant-table-wrapper TableList">
                     <Table

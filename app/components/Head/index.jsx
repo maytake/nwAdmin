@@ -90,7 +90,7 @@ class HeadCompontent extends React.Component {
             {
                 firstMenu.map(item => {
                     return (
-                        <Menu.Item key={item.index}><Link to={item.index}>{item.title}</Link></Menu.Item>
+                        <Menu.Item key={item.src}><Link to={item.src}>{item.title}</Link></Menu.Item>
                     )
                 })
             }
