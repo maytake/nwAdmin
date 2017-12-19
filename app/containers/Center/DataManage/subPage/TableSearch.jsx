@@ -2,11 +2,13 @@ import React from 'react'
 import { Link } from 'react-router'
 import { is, fromJS } from 'immutable';
 
-import { Form, Row, Col, Input, Button, Select, DatePicker, TimePicker, } from 'antd';
+import { Form, Row, Col, Input, Button, Select, Switch, Radio,
+ Slider, Icon, DatePicker, TimePicker, InputNumber, AutoComplete,} from 'antd';
 const FormItem = Form.Item;
 const { MonthPicker, RangePicker } = DatePicker;
 const Option = Select.Option;
-
+const RadioButton = Radio.Button;
+const RadioGroup = Radio.Group;
 
 
 
@@ -14,6 +16,9 @@ class TableSearch extends React.Component {
     constructor(props, context) {
         super(props, context);
     }
+
+
+    //获取提交的values
     handleSearch(e) {
         let that=this;
         e.preventDefault();
@@ -21,10 +26,13 @@ class TableSearch extends React.Component {
             if(err){
                 return
             }
+            console.log(values)
             that.props.searchTable(values);
         });
     }
 
+
+    //重置
     restSearchForm() {
       this.props.form.setFieldsValue({
             keyWord: "",
@@ -94,7 +102,7 @@ class TableSearch extends React.Component {
                           label="请选择日期"
                         >
                           {getFieldDecorator('date-time-picker', config)(
-                            <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />
+                            <DatePicker  format="YYYY-MM-DD HH:mm:ss" />
                           )}
                         </FormItem>
                     </Col>
@@ -109,7 +117,7 @@ class TableSearch extends React.Component {
                                   message: '请输入20个字以内的名称'
                               }],
                           })(
-                              <Input />
+                              <Input type="text" placeholder="请输入20个字以内的名称" />
                           )}
                         </FormItem>
                     </Col>
@@ -132,44 +140,134 @@ class TableSearch extends React.Component {
                           )}
                         </FormItem>
                     </Col>
+                  
                     <Col {...ColProps} xl={{ span: 6 }} md={{ span: 8 }}>
-                        <FormItem
-                          {...formItemLayout}
-                          label="查找范围"
-                          >
-                          {getFieldDecorator('selectRange', {
-                            rules: [
-                              { required: true, message: '请选择范围' },
-                            ],
+                       <FormItem label="输入密码" layout="vertical"  
+                          {...formItemLayout}>
+                          {getFieldDecorator('password', {
+                              initialValue: '',
+                              rules: [{
+                                  required: true,
+                                  message: '请输入20个字以内的名称'
+                              }],
                           })(
-                            <Select placeholder="请选择范围">
-                              <Option value="red">Red</Option>
-                              <Option value="green">Green</Option>
-                              <Option value="blue">Blue</Option>
-                            </Select>
+                              <Input  type="password" placeholder="Password" />
                           )}
                         </FormItem>
                     </Col>
+
+                    <Col {...ColProps} xl={{ span: 6 }} md={{ span: 8 }}>
+                        <FormItem label="inline"
+                          label="选择日期"
+                          {...formItemLayout}
+                        >
+                          <Col span={11}>
+                            <FormItem >
+                              {getFieldDecorator('date-time-picker', config)(
+                                <DatePicker  format="YYYY-MM-DD HH:mm:ss" />
+                              )}
+                            </FormItem>
+                          </Col>
+                          <Col span={2}>
+                            <span style={{ display: 'inline-block', width: '100%', textAlign: 'center' }}>
+                              -
+                            </span>
+                          </Col>
+                          <Col span={11}>
+                            <FormItem>
+                              {getFieldDecorator('date-time-picker', config)(
+                                <DatePicker  format="YYYY-MM-DD HH:mm:ss" />
+                              )}
+                            </FormItem>
+                          </Col>
+                        </FormItem>
+                    </Col> 
+
                     <Col {...ColProps} xl={{ span: 6 }} md={{ span: 8 }}>
                         <FormItem
                           {...formItemLayout}
-                          label="查找范围"
-                          >
-                          {getFieldDecorator('selectRange', {
-                            rules: [
-                              { required: true, message: '请选择范围' },
-                            ],
-                          })(
-                            <Select placeholder="请选择范围">
-                              <Option value="red">Red</Option>
-                              <Option value="green">Green</Option>
-                              <Option value="blue">Blue</Option>
-                            </Select>
+                          label="输入数字"
+                        >
+                          {getFieldDecorator('input-number', { initialValue: 3 })(
+                            <InputNumber min={1} max={10} />
+                          )}
+                          <span className="ant-form-text"> machines</span>
+                        </FormItem>
+                    </Col>
+
+                    <Col {...ColProps} xl={{ span: 6 }} md={{ span: 8 }}>
+                        <FormItem
+                          {...formItemLayout}
+                          label="Switch"
+                        >
+                          {getFieldDecorator('switch', { valuePropName: 'checked' })(
+                            <Switch />
                           )}
                         </FormItem>
                     </Col>
-            
-                        
+
+                    <Col {...ColProps} xl={{ span: 6 }} md={{ span: 8 }}>
+                          <FormItem
+                            {...formItemLayout}
+                            label="Radio.Group"
+                          >
+                            {getFieldDecorator('radio-group')(
+                              <RadioGroup>
+                                <Radio value="a">item 1</Radio>
+                                <Radio value="b">item 2</Radio>
+                                <Radio value="c">item 3</Radio>
+                              </RadioGroup>
+                            )}
+                          </FormItem>
+                    </Col>
+
+                    <Col {...ColProps} xl={{ span: 6 }} md={{ span: 8 }}>
+                          <FormItem
+                            {...formItemLayout}
+                            label="Radio.Button"
+                          >
+                            {getFieldDecorator('radio-button')(
+                              <RadioGroup>
+                                <RadioButton value="a">item 1</RadioButton>
+                                <RadioButton value="b">item 2</RadioButton>
+                                <RadioButton value="c">item 3</RadioButton>
+                              </RadioGroup>
+                            )}
+                          </FormItem>
+                    </Col>
+
+
+                    <Col {...ColProps} xl={{ span: 6 }} md={{ span: 8 }}>
+                       <FormItem label="输入密码" layout="vertical"  
+                          {...formItemLayout}>
+                          {getFieldDecorator('password', {
+                              initialValue: '',
+                              rules: [{
+                                  required: true,
+                                  message: '请输入20个字以内的名称'
+                              }],
+                          })(
+                              <Input  type="password" placeholder="Password" />
+                          )}
+                        </FormItem>
+                    </Col>
+
+                    <Col {...ColProps} xl={{ span: 6 }} md={{ span: 8 }}>
+                       <FormItem label="输入密码" layout="vertical"  
+                          {...formItemLayout}>
+                          {getFieldDecorator('password', {
+                              initialValue: '',
+                              rules: [{
+                                  required: true,
+                                  message: '请输入20个字以内的名称'
+                              }],
+                          })(
+                              <Input  type="password" placeholder="Password" />
+                          )}
+                        </FormItem>
+                    </Col>
+
+
                 </Row>
 
 

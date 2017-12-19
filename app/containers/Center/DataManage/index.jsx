@@ -169,7 +169,7 @@ class TableManageList extends React.Component {
         return (
             <div>
 
-                <div>  
+                <div style={{ position:'relative'}}>  
                     <ModalForm
                     editListDataFn={this.props.editListDataFn}
                     visible={this.state.visible}
@@ -183,7 +183,7 @@ class TableManageList extends React.Component {
 
                     <TableSearch searchTable={this.searchTable.bind(this)}/>
 
-                    <Button type="primary" icon="plus-circle-o"  onClick={this.addShowModel.bind(this)} style={{}}>
+                    <Button type="primary" icon="plus-circle-o"  onClick={this.addShowModel.bind(this)} style={{position:'absolute',bottom:'0'}}>
                       添加
                     </Button>
                     
